@@ -1,5 +1,7 @@
 <!-- TODO 完成响应式 -->
 <template>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="service-container">
       <el-col
         :xl="14"
@@ -12,7 +14,7 @@
           <el-divider><span class="red-font">業務分野</span></el-divider>
           <div class="black-font">服务领域</div>
         </div>
-      <div class="service-content">
+        <div class="service-content">
           <div class="content-item" v-for="(item, index) in listData" :key="index">
             <span class="left-block"></span>
             <div class="to-detail" @click="toDetail(item.Id)">
@@ -20,34 +22,40 @@
               <p class="service-black-font">{{ item.chineseName }}</p>
             </div>
           </div>
-      </div>
+        </div>
       </el-col>
     </div>
+  </div>
 </template>
 
 <script>
-import { getServiceData } from '../../api/api'
+import { getBgData, getServiceData } from '../../api/api'
 
 export default {
   name: 'Service',
   data () {
     return {
-      listData: []
+      listData: [],
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../../assets/image/swipe/default.jpg')
     }
   },
   mounted () {
-    getServiceData()
-      .then(data => {
-        this.listData = data
-      })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
-        })
-      })
+    this.getData()
   },
   methods: {
+    getData () {
+      getServiceData()
+        .then(data => {
+          this.listData = data
+        })
+        .catch(err => {
+          this.$message({
+            type: 'error',
+            message: err
+          })
+        })
+    },
     toDetail (id) {
       this.$router.push({
         path: '/service/details',
@@ -55,6 +63,22 @@ export default {
           activeName: String(id)
         }
       })
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/service') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

@@ -1,5 +1,7 @@
 <!-- 金鹏荣誉 -->
 <template>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="honor-container">
       <el-col :lg="12" :md="12" :xl="12" :sm="24">
         <div class="honor-title">
@@ -22,11 +24,12 @@
         ></pagination>
       </el-col>
     </div>
+  </div>
 </template>
 
 <script>
 import Pagination from '../components/Pagination'
-import { getHonorData } from '../api/api'
+import { getBgData, getHonorData } from '../api/api'
 export default {
   name: 'Horror',
   components: {
@@ -35,6 +38,8 @@ export default {
   data () {
     return {
       list: [],
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../assets/image/swipe/default.jpg'),
       page: {
         Display_Page_Number: 5,
         PageNumber: 1
@@ -43,6 +48,7 @@ export default {
   },
   mounted () {
     this.getData()
+    this.getBg()
   },
   methods: {
     getData () {
@@ -62,6 +68,22 @@ export default {
     handleCurrentChange (val) {
       this.page.PageNumber = val
       this.getData()
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/honor') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

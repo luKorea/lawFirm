@@ -1,50 +1,50 @@
 <template>
-  <div class="nav">
-      <div class="nav-a">
-        <el-row>
-          <el-col>
-            <ul class="nav-a-ul">
-              <li class="nav-a-li"
-                  @click="selected(index)"
-                  v-for="(item,index) in configNav"
-                  :class="classA === index ? 'active' : '' "
-              >
-                <router-link
-                  :to='item.path'
-                  class="nav-a-text"
-                  :class="{'router-link-exact-active':ind === index}"
-                  @click.native="showToggle(index)">
-                  <div class="list-flex">
-                    <span>{{ item.jName }}</span>
-                    <span>{{ item.cName }}</span>
-                  </div>
-                </router-link>
-                <ul class="menu_ul" :class="{'active' :index===isShow}">
-                  <li
-                    class="menu_li"
-                    v-for = "nav in item.subItems"
-                    :class="classB === nav ? 'active' : '' "
-                    @click="menuselected(nav)"
+  <el-row>
+    <el-col>
+      <div class="nav">
+        <div class="nav-a">
+          <ul class="nav-a-ul">
+            <li class="nav-a-li"
+                @click="selected(index)"
+                v-for="(item,index) in configNav"
+                :class="classA === index ? 'active' : '' "
+            >
+              <router-link
+                :to='item.path'
+                class="nav-a-text"
+                :class="{'router-link-exact-active':ind === index}"
+                @click.native="showToggle(index)">
+                <div class="list-flex">
+                  <span>{{ item.jName }}</span>
+                  <span>{{ item.cName }}</span>
+                </div>
+              </router-link>
+              <ul class="menu_ul" :class="{'active' :index===isShow}">
+                <li
+                  class="menu_li"
+                  v-for = "nav in item.subItems"
+                  :class="classB === nav ? 'active' : '' "
+                  @click="menuselected(nav)"
+                >
+                  <router-link
+                    class="menu_ul_text"
+                    :to="nav.path"
+                    :class="{'active':nav.path === linkClick}"
+                    @click = "treeNavSwitch(nav)"
                   >
-                    <router-link
-                      class="menu_ul_text"
-                      :to="nav.path"
-                      :class="{'active':nav.path === linkClick}"
-                      @click = "treeNavSwitch(nav)"
-                    >
-                      <div class="flex-font">
-                        <span>{{ nav.jName }}</span>
-                        <span>{{ nav.cName }}</span>
-                      </div>
-                    </router-link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </el-col>
-        </el-row>
+                    <div class="flex-font">
+                      <span>{{ nav.jName }}</span>
+                      <span>{{ nav.cName }}</span>
+                    </div>
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
-  </div>
+    </el-col>
+  </el-row>
 </template>
 
 <script>

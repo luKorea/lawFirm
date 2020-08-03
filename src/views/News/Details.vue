@@ -1,27 +1,35 @@
 <!-- TODO 完成新闻详情页 -->
 <template>
-  <div class="detail-container">
-    <el-col :lg="12" :md="12" :xl="12" :sm="24">
-      <div class="title">
-        <div class="big-title">{{ dataList.jTitle }} {{ dataList.id }}</div>
-        <div class="small-title">{{ dataList.cTitle }}</div>
-      </div>
-      <div class="red-content left-font">
-        <el-col :lg="24" :md="24" :xl="24" :sm="24"><span>{{ dataList.jContent }}</span></el-col>
-      </div>
-      <div class="black-content left-font">
-        <el-col :lg="24" :md="24" :xl="24" :sm="24"><span>{{ dataList.cContent }}</span></el-col>
-      </div>
-    </el-col>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
+    <div class="detail-container">
+      <el-col :lg="12" :md="12" :xl="12" :sm="24">
+        <div class="title">
+          <div class="big-title">{{ dataList.jTitle }} {{ dataList.id }}</div>
+          <div class="small-title">{{ dataList.cTitle }}</div>
+        </div>
+        <div class="red-content left-font">
+          <el-col :lg="24" :md="24" :xl="24" :sm="24"><span>{{ dataList.jContent }}</span></el-col>
+        </div>
+        <div class="black-content left-font">
+          <el-col :lg="24" :md="24" :xl="24" :sm="24"><span>{{ dataList.cContent }}</span></el-col>
+        </div>
+      </el-col>
+    </div>
   </div>
 </template>
 
 <script>
+import { getBgData } from '../../api/api'
+
 export default {
   name: 'Details',
   data () {
     return {
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../../assets/image/swipe/default.jpg'),
       id: 0,
+      type: '',
       rematchList: [
         {
           id: 1,
@@ -103,16 +111,35 @@ export default {
   },
   created () {
     this.id = this.$route.query.id
+    this.type = this.$route.query.type
     this.getData(this.id)
+    this.getBg()
   },
   methods: {
     getData (id) {
+      console.log(this.type)
       this.rematchList.forEach(item => {
         if (id === item.id) {
           this.dataList = item
           console.log(this.dataList)
         }
       })
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/news') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

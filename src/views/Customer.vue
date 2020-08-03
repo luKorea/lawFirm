@@ -1,57 +1,80 @@
 <!-- TODO 重要客户完成响应式 -->
 <template>
-  <div class="customer-container">
-    <el-col
-      :xl="14"
-      :lg="24"
-      :md="24"
-      :sm="24"
-      :xs="24"
-    >
-      <div class="center-title">
-        <el-divider><span class="red-font">クライアント</span></el-divider>
-        <div class="black-font">重要客户</div>
-      </div>
-      <div class="customer-content">
-        <div class="content-item" v-for="(item, index) in customerData.customerName" :key="index">
-          <span class="left-block"></span>
-          <div>
-            <p class="customer-red-font">{{ item.jaCustomer }}</p>
-            <p class="customer-black-font left-font">{{ item.chCustomer }}</p>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
+    <div class="customer-container">
+      <el-col
+        :xl="14"
+        :lg="24"
+        :md="24"
+        :sm="24"
+        :xs="24"
+      >
+        <div class="center-title">
+          <el-divider><span class="red-font">クライアント</span></el-divider>
+          <div class="black-font">重要客户</div>
+        </div>
+        <div class="customer-content">
+          <div class="content-item" v-for="(item, index) in customerData.customerName" :key="index">
+            <span class="left-block"></span>
+            <div>
+              <p class="customer-red-font">{{ item.jaCustomer }}</p>
+              <p class="customer-black-font left-font">{{ item.chCustomer }}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="customer-img">
-        <div class="customer-img-item" v-for="(item, index) in customerData.customerLogo" :key="index">
-          <img :src="imgUrl + item.imgPath" alt="">
+        <div class="customer-img">
+          <div class="customer-img-item" v-for="(item, index) in customerData.customerLogo" :key="index">
+            <img :src="imgUrl + item.imgPath" alt="">
+          </div>
         </div>
-      </div>
-    </el-col>
+      </el-col>
+    </div>
   </div>
 </template>
 
 <script>
-import { getCustomerData } from '../api/api'
+  import { getBgData, getCustomerData } from '../api/api'
 
 export default {
   name: 'Customer',
   data () {
     return {
       customerData: {},
-      imgUrl: process.env.VUE_APP_IMAGE_URL
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../assets/image/swipe/default.jpg')
     }
   },
   mounted () {
-    getCustomerData()
-      .then(data => {
-        this.customerData = data
-      })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
+    this.getData()
+    this.getBg()
+  },
+  methods: {
+    getData () {
+      getCustomerData()
+        .then(data => {
+          this.customerData = data
         })
-      })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/customer') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>

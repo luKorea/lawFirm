@@ -1,12 +1,19 @@
 <template>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="contact-container">
       <el-col :lg="22" :md="22" :xl="22" :sm="24">
         <div class="contact-content">
           <!--地图区域-->
-            <div class="content-map" id="echarts"  ref="myEchart"></div>
+          <div class="content-map" id="echarts"  ref="myEchart"></div>
+          <!--TODO 轮播图区域-->
           <div class="content-swipe">
-            <el-carousel height="454px">
-              <el-carousel-item height="454px" v-for="item in 4" :key="item">
+            <el-carousel
+              :autoplay="false" trigger="click"
+              arrow="never" height="454px"
+              @change="lightMap"
+            >
+              <el-carousel-item  height="454px" v-for="item in 4" :key="item">
                 <div class="move-font">
                   <span class="move-title">国内分所</span>
                   <div class="move-content">
@@ -25,22 +32,29 @@
         </div>
       </el-col>
     </div>
+  </div>
 </template>
 
 <script>
 import echarts from 'echarts'
 import '../../node_modules/echarts/map/js/world.js'
+// geo 用于绘制散点地图
+import 'echarts/lib/component/geo'
 
 import data from '../utils/echarts.json'
+import { getBgData } from '../api/api'
 export default {
   name: 'Contact',
   data () {
     return {
-      chart: null
+      chart: null,
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: ''
     }
   },
   mounted () {
     this.$nextTick(() => this.initChart())
+    this.getBg()
   },
   beforeDestroy () {
     if (!this.chart) {
@@ -50,11 +64,12 @@ export default {
     this.chart = null
   },
   methods: {
+    // TODO 点击每一项的时候，将地图对应的点高亮
+    lightMap (item) {
+      console.log(item)
+    },
     initChart () {
-      this.chart = echarts.init(this.$refs.myEchart)
-      window.onresize = echarts.init(this.$refs.myEchart).resize
-      // 把配置和数据放这里
-      this.chart.setOption({
+      const config = {
         dataRange: {
           show: false,
           realtime: true,
@@ -62,7 +77,31 @@ export default {
           color: ['#6A1D21']
         },
         series: data
-      })
+      }
+      this.chart = echarts.init(this.$refs.myEchart)
+      window.onresize = echarts.init(this.$refs.myEchart).resize
+      // TODO 把配置和数据放这里
+      this.chart.setOption(config)
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/contact') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          this.$message({
+            type: 'error',
+            message: '数据返回失败'
+          })
+        })
     }
   }
 }

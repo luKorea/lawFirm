@@ -1,17 +1,19 @@
 <template>
-  <div class="service-detail-container">
-    <el-col :lg="16" :md="16" :sm="24">
-      <el-tabs tab-position="left" v-model="activeName">
-        <el-tab-pane
-          class="item"
-          v-for="(item, index) in list"
-          :key="index"
-          :name="String(item.Id)"
-        >
-          <div slot="label" class="item">
-            <span :class="String(item.Id) !== activeName ? 's-red-font' : 'bw-red-font'">{{ item.japaneseName }}</span>
-            <span :class="String(item.Id) !== activeName ? 's-black-font' : 'bw-black-font'">{{ item.chineseName }}</span>
-          </div>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
+    <div class="service-detail-container">
+      <el-col :lg="16" :md="16" :sm="24">
+        <el-tabs tab-position="left" v-model="activeName">
+          <el-tab-pane
+            class="item"
+            v-for="(item, index) in list"
+            :key="index"
+            :name="String(item.Id)"
+          >
+            <div slot="label" class="item">
+              <span :class="String(item.Id) !== activeName ? 's-red-font' : 'bw-red-font'">{{ item.japaneseName }}</span>
+              <span :class="String(item.Id) !== activeName ? 's-black-font' : 'bw-black-font'">{{ item.chineseName }}</span>
+            </div>
             <div class="title">
               <div class="red-font">{{ item.japaneseName }}</div>
               <div class="black-font">{{ item.chineseName }}</div>
@@ -30,37 +32,57 @@
                 </div>
               </el-col>
             </div>
-        </el-tab-pane>
-      </el-tabs>
-    </el-col>
+          </el-tab-pane>
+        </el-tabs>
+      </el-col>
+    </div>
   </div>
 </template>
 
 <script>
-import { getServiceDetailData } from '../../api/api'
+import { getBgData, getServiceDetailData } from '../../api/api'
 
 export default {
   name: 'Details',
   data () {
     return {
       activeName: '',
-      list: []
+      list: [],
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../../assets/image/swipe/default.jpg')
     }
   },
-  created () {
-    console.log(typeof this.$route.query.activeName)
+  mounted () {
     this.activeName = this.$route.query.activeName
-    console.log(typeof this.activeName)
-    getServiceDetailData()
-      .then(data => {
-        this.list = data
-      })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
+    this.getData()
+    this.getBg()
+  },
+  methods: {
+    getData () {
+      getServiceDetailData()
+        .then(data => {
+          this.list = data
         })
-      })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/service') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>

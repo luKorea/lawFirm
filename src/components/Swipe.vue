@@ -1,9 +1,14 @@
 <template>
-  <el-carousel :interval="3000" arrow="never" class="swipe-container" height="706px">
+  <el-carousel v-if="imgList.length > 0" :interval="3000" arrow="never" class="swipe-container" height="706px">
     <el-carousel-item height="706px" v-for="(item, index) in imgList" :key="index">
       <el-row>
-        <el-col :lg="24" :md="24" :xl="24" :sm="24">
-          <img ref="imgHeight" :src="imgUrl + item"  class="banner_img"/>
+        <el-col
+          :lg="24"
+          :md="24"
+          :sm="24"
+          :xs="24"
+        >
+          <img ref="imgHeight" :src="imgUrl + item"  class="banner_img" />
         </el-col>
       </el-row>
     </el-carousel-item>
@@ -23,16 +28,31 @@ export default {
     }
   },
   mounted () {
-    getSwipeData()
-      .then(data => {
-        data.length > 0 ? this.imgList = data : this.imgList = []
-      })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
+    this.getData()
+    /*    this.imgLoad()
+    window.addEventListener('resize', () => {
+      this.imgHeight = this.$refs.imgHeight[0].height
+      this.imgLoad()
+    }, false) */
+  },
+  methods: {
+    getData () {
+      getSwipeData()
+        .then(data => {
+          data.length > 0 ? this.imgList = data : this.imgList = []
         })
+        .catch(err => {
+          this.$message({
+            type: 'error',
+            message: err
+          })
+        })
+    },
+    imgLoad () {
+      this.$nextTick(() => {
+        this.imgHeight = this.$refs.imgHeight[0].height
       })
+    }
   }
   /* mounted () {
       this.imgHeight = '705px'
@@ -50,11 +70,13 @@ export default {
   margin-bottom: 85px;
   .banner_img {
     width: 100%;
-    object-fit: contain;
+    height: 706px;
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      //若图片不能全部显示,加上下面这条调节两个值可以设置要显示图片的哪个部分
+      object-position: 5px 10%;
     }
   }
 }

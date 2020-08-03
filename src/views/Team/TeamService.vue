@@ -1,41 +1,47 @@
 <template>
-  <div class="team-service-container">
-    <el-col :lg="12" :md="12" :xl="12" :sm="24">
-      <div class="title">
-        <el-divider><span class="red-font">チーム業務分野</span></el-divider>
-        <div class="black-font">团队服务领域</div>
-      </div>
-<!--单栏显示-->
-      <el-col :lg="24" :md="24" :xl="24" :sm="24">
-        <template v-for="item in serviceList">
-          <div class="content1">
-            <div class="top-content">
-              <div class="top">{{ item.japaneseName }}</div>
-              <div class="bottom">{{ item.chineseName }}</div>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
+    <div class="team-service-container">
+      <el-col :lg="12" :md="12" :xl="12" :sm="24">
+        <div class="title">
+          <el-divider><span class="red-font">チーム業務分野</span></el-divider>
+          <div class="black-font">团队服务领域</div>
+        </div>
+        <!--单栏显示-->
+        <el-col :lg="24" :md="24" :xl="24" :sm="24">
+          <template v-for="item in serviceList">
+            <div class="content1">
+              <div class="top-content">
+                <div class="top">{{ item.japaneseName }}</div>
+                <div class="bottom">{{ item.chineseName }}</div>
+              </div>
+              <div class="content-item" v-for="(item, index) in item.details" :key="index">
+                <div class="red">{{ item.jaContent }}</div>
+                <div class="black">{{ item.chContent }}</div>
+              </div>
             </div>
-            <div class="content-item" v-for="(item, index) in item.details" :key="index">
-              <div class="red">{{ item.jaContent }}</div>
-              <div class="black">{{ item.chContent }}</div>
-            </div>
-          </div>
-        </template>
+          </template>
+        </el-col>
       </el-col>
-    </el-col>
+    </div>
   </div>
 </template>
 
 <script>
-import { getTeamServiceData } from '../../api/api'
+  import { getBgData, getTeamServiceData } from '../../api/api'
 
 export default {
   name: 'TeamService',
   data () {
     return {
-      serviceList: []
+      serviceList: [],
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../../assets/image/swipe/default.jpg')
     }
   },
   mounted () {
     this.getData()
+    this.getBg()
   },
   methods: {
     getData () {
@@ -51,6 +57,22 @@ export default {
             type: 'error',
             message: err
           })
+        })
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/teamService') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
   }

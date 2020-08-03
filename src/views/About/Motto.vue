@@ -1,46 +1,77 @@
 <!-- TODO 完成 -->
 <template>
-  <div class="motto-container">
-    <el-col :lg="12" :md="12" :xl="12" :sm="24">
-      <div class="title">
-        <div class="big-title">{{ mottoInfo.japaneseHeadline }}</div>
-        <div class="small-title">{{ mottoInfo.chineseHeadline }}</div>
-      </div>
-      <div class="red-content left-font">
-        <el-col :lg="24" :md="24" :xl="24" :sm="24">
-          <div>{{ mottoInfo.japaneseContent }}</div>
-        </el-col>
-      </div>
-      <div class="black-content left-font">
-        <el-col :lg="24" :md="24" :xl="24" :sm="24">
-          <div>{{ mottoInfo.chineseContent }}</div>
-        </el-col>
-      </div>
-    </el-col>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
+    <div class="motto-container">
+      <el-col :lg="12" :md="12" :xl="12" :sm="24">
+        <div class="title">
+          <div class="big-title">{{ mottoInfo.japaneseHeadline }}</div>
+          <div class="small-title">{{ mottoInfo.chineseHeadline }}</div>
+        </div>
+        <div class="red-content left-font">
+          <el-col :lg="24" :md="24" :xl="24" :sm="24">
+            <div>{{ mottoInfo.japaneseContent }}</div>
+          </el-col>
+        </div>
+        <div class="black-content left-font">
+          <el-col :lg="24" :md="24" :xl="24" :sm="24">
+            <div>{{ mottoInfo.chineseContent }}</div>
+          </el-col>
+        </div>
+      </el-col>
+    </div>
   </div>
 </template>
 
 <script>
-import { getMottoData } from '../../api/api'
+  import { getBgData, getMottoData } from '../../api/api'
 
 export default {
   name: 'Motto',
   data () {
     return {
-      mottoInfo: {}
+      mottoInfo: {},
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../../assets/image/swipe/default.jpg')
     }
   },
   mounted () {
-    getMottoData()
-      .then(data => {
-        this.mottoInfo = data
-      })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
+    this.getData()
+    this.getBg()
+  },
+  methods: {
+    getData () {
+      getMottoData()
+        .then(data => {
+          this.mottoInfo = data
         })
-      })
+        .catch(err => {
+          this.$message({
+            type: 'error',
+            message: err
+          })
+        })
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/motto') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          this.$message({
+            type: 'error',
+            message: '数据返回失败'
+          })
+        })
+    }
   }
 }
 </script>

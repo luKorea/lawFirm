@@ -5,6 +5,14 @@ const BASE_URL = '/website/head'
 /* TODO Common */
 
 /**
+   * @description 获取背景图
+   * @method getBgData
+   */
+export const getBgData = async () => {
+  return await request.post(`${BASE_URL}/getBackground`)
+}
+
+/**
  * @description 获取导航栏
  * @method getNavData
  */
@@ -186,8 +194,13 @@ export const getContactData = async () => {
  * @description 获取新闻资讯
  * @method getNewsInformationData
  */
-export const getNewsInformationData = async () => {
-  return await request.get('/news/information')
+
+// eslint-disable-next-line camelcase
+export const getNewsInformationData = async ({ Display_Page_Number, PageNumber }) => {
+  return await request.post(`${BASE_URL}/getNewsInformation`, {
+    Display_Page_Number,
+    PageNumber
+  })
 }
 
 /**
@@ -202,10 +215,14 @@ export const getNewsInformationDetailData = async (id) => {
  * @description 获取法律法规
  * @method getNewsRegulationsData
  */
-export const getNewsRegulationsData = async () => {
-  return await request.get('/news/regulations')
-}
 
+// eslint-disable-next-line camelcase
+export const getNewsRegulationsData = async ({ Display_Page_Number, PageNumber }) => {
+  return await request.post(`${BASE_URL}/getLegislation`, {
+    Display_Page_Number,
+    PageNumber
+  })
+}
 /**
  * @description 获取法律法规详情
  * @method getNewsRegulationsDetailData

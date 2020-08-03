@@ -7,6 +7,7 @@
         <ul class="nav-a-ul">
           <li class="nav-a-li"
               @click="selected(index)"
+              v-if="configNav.length > 0"
               v-for="(item,index) in configNav"
               :class="classA === index ? 'active' : '' "
           >
@@ -46,7 +47,9 @@
       <!--    </el-col>-->
     </div>
     <div class="content">
-      <router-view :key="key"/>
+      <keep-alive>
+        <router-view :key="key"/>
+      </keep-alive>
     </div>
     <ls-footer />
   </div>
@@ -81,9 +84,6 @@ export default {
       path: [],
       showSwipe: true
     }
-  },
-  created () {
-    this.getNavData()
   },
   methods: {
     getNavData () {
@@ -131,6 +131,7 @@ export default {
     }
   },
   mounted () {
+    this.getNavData()
     if (this.$route.query.item) {
       this.ind = this.$route.query.item
     } else {

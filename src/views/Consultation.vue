@@ -1,5 +1,7 @@
 <!-- TODO 完成响应式，未完成表单 -->
 <template>
+  <div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="consultation-container">
       <div class="title">
         <div class="big-title">お問い合わせ</div>
@@ -7,10 +9,10 @@
       </div>
       <div class="form-container">
         <el-form class="form-content" ref="form" :model="formData">
-            <div class="input-container">
-              <div class="top-font">名前</div>
-              <el-input v-model="formData.name" class='input-text' placeholder="姓名" />
-            </div>
+          <div class="input-container">
+            <div class="top-font">名前</div>
+            <el-input v-model="formData.name" class='input-text' placeholder="姓名" />
+          </div>
           <div class="input-container">
             <div class="top-font">電話番号</div>
             <el-input v-model="formData.phone" class='input-text' placeholder="联系方式" />
@@ -34,33 +36,36 @@
         <span class="black-font">邮箱：Japan@kingpound.com</span>
         <span class="black-font">联系电话：+86 20 38390333</span>
       </div>
-        <div class="qrCode-content">
-          <el-col :xl='3' :lg="24" :md="24" :sm="24">
-            <div class="qrCode-item">
-              <img src="../assets/image/qrcode/qrcode_one.png" alt="">
-              <p class="small-red-font">金鵬公式アカウントQRコード</p>
-              <p>金鹏官方公众号二维码</p>
-            </div>
-          </el-col>
-          <el-col :xl='3' :lg="24" :md="24" :sm="24">
+      <div class="qrCode-content">
+        <el-col :xl='3' :lg="24" :md="24" :sm="24">
+          <div class="qrCode-item">
+            <img src="../assets/image/qrcode/qrcode_one.png" alt="">
+            <p class="small-red-font">金鵬公式アカウントQRコード</p>
+            <p>金鹏官方公众号二维码</p>
+          </div>
+        </el-col>
+        <el-col :xl='3' :lg="24" :md="24" :sm="24">
           <div class="qrCode-item">
             <img src="../assets/image/qrcode/qrcode_two.png" alt="">
             <p class="small-red-font">金鵬日本オフィス公式アカウントQRコード</p>
             <p>金鹏日本办事处官方公众号二维码</p>
           </div>
-          </el-col>
-          <el-col :xl='3' :lg="24" :md="24" :sm="24">
+        </el-col>
+        <el-col :xl='3' :lg="24" :md="24" :sm="24">
           <div class="qrCode-item">
             <img src="../assets/image/qrcode/qrcode_three.png" alt="">
             <p class="small-red-font">金鵬日本オフィス公式ツイッターQRコード</p>
             <p>金鹏官方推特二维码</p>
           </div>
-          </el-col>
-        </div>
+        </el-col>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
+import { getBgData } from '../api/api'
+
 export default {
   name: 'Consultation',
   data () {
@@ -69,10 +74,35 @@ export default {
         name: '',
         email: '',
         desc: ''
-      }
+      },
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: require('../assets/image/swipe/default.jpg')
     }
   },
+  mounted () {
+    this.getBg()
+  },
   methods: {
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/consultaion') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          this.$message({
+            type: 'error',
+            message: '数据返回失败'
+          })
+        })
+    },
     onSubmit () {
       if (this.formData.name && this.formData.email && this.formData.desc !== '') {
         this.$message({

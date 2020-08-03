@@ -1,6 +1,7 @@
 <!-- TODO 完成 -->
 <template>
   <div class="wrap-container">
+    <div class="bg-container" :style="{background: 'url( '+ img +') !important'}"></div>
     <div class="title">
       <div class="big-title">{{ externalInfo.japaneseHeadline }}</div>
       <div class="small-title">{{ externalInfo.chineseHeadline }}</div>
@@ -19,26 +20,51 @@
 </template>
 
 <script>
-import { getExternalsData } from '../../api/api'
+import { getBgData, getExternalsData } from '../../api/api'
 
 export default {
   name: 'External',
   data () {
     return {
-      externalInfo: {}
+      externalInfo: {},
+      imgUrl: process.env.VUE_APP_IMAGE_URL,
+      img: ''
     }
   },
   mounted () {
-    getExternalsData()
-      .then(data => {
-        this.externalInfo = data
-      })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
+    this.getData()
+    this.getBg()
+  },
+  methods: {
+    getData () {
+      getExternalsData()
+        .then(data => {
+          this.externalInfo = data
         })
-      })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getBg () {
+      getBgData()
+        .then(data => {
+          if (data.length > 0) {
+            data.forEach(item => {
+              if (item.path === '/external') {
+                this.img = item.imgPath
+                console.log(item.path)
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          this.$message({
+            type: 'error',
+            message: '数据返回失败'
+          })
+        })
+    }
   }
 }
 </script>
