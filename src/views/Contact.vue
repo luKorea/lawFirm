@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
+    <div class="bg-container contact" :style="{background: 'url( '+ img +')'}"></div>
     <div class="contact-container">
       <el-col :lg="22" :md="22" :xl="22" :sm="24">
         <div class="contact-content">
@@ -36,24 +36,28 @@
 </template>
 
 <script>
-import echarts from 'echarts'
-import '../../node_modules/echarts/map/js/world.js'
-// geo 用于绘制散点地图
-import 'echarts/lib/component/geo'
-
-import data from '../utils/echarts.json'
 import { getBgData } from '../api/api'
+import echarts from 'echarts'
+import world from 'echarts/map/json/world.json'
+
 export default {
   name: 'Contact',
   data () {
     return {
       chart: null,
       imgUrl: process.env.VUE_APP_IMAGE_URL,
-      img: ''
+      img: '',
+      symbolSize: 8,
+      data: [ // 散点数据  value:[纬度，经度，数据]
+        { name: '浙江省', value: [122.6953, 30.8936, 100], index: 0 },
+        { name: '江苏省', value: [117.5977, 34.4531, 100], index: 1 },
+        { name: '宁夏', value: [106.9629, 38.9795, 100], index: 2 },
+        { name: '天津', value: [117.334, 40.1221, 100], index: 3 }
+      ]
     }
   },
   mounted () {
-    this.$nextTick(() => this.initChart())
+    this.$nextTick(() => this.createMap())
     this.getBg()
   },
   beforeDestroy () {
@@ -65,23 +69,47 @@ export default {
   },
   methods: {
     // TODO 点击每一项的时候，将地图对应的点高亮
-    lightMap (item) {
-      console.log(item)
+    lightMap (index) {
+      console.log(index)
     },
-    initChart () {
-      const config = {
-        dataRange: {
-          show: false,
-          realtime: true,
-          calculable: true,
-          color: ['#6A1D21']
+    // 初始化数据
+    getOptions () {
+      return {
+        color: ['#008c8c'],
+        // 要显示散点图，必须填写这个配置
+        geo: {
+          show: true, // 是否显示地理坐标系组件
+          roam: false, // 是否允许鼠标滚动放大，缩小
+          map: 'world',
+          emphasis: { // 高亮状态下的多边形和标签样式。
+            itemStyle: { // 区域
+              areaColor: '#ccc'
+            }
+          },
+          center: [100.4, 35.9], // 视图中心，展示在中国
+          zoom: 1 // 起始缩放比例
         },
-        series: data
+        // 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）。
+        series: [
+          {
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            symbolSize: 10,
+            mapType: 'world',
+            data: this.data,
+            hoverAnimation: false // 鼠标移入放大圆
+          }
+        ]
       }
-      this.chart = echarts.init(this.$refs.myEchart)
-      window.onresize = echarts.init(this.$refs.myEchart).resize
-      // TODO 把配置和数据放这里
-      this.chart.setOption(config)
+    },
+    createMap (initOption) {
+      const dom = document.getElementById('echarts')
+      const mapChart = echarts.init(dom)
+      this.chart = echarts.init(dom)
+      echarts.registerMap('world', world)/* 注册world地图 */
+      const options = initOption || this.getOptions()
+      mapChart.setOption(options)
+      return mapChart
     },
     getBg () {
       getBgData()
@@ -95,13 +123,7 @@ export default {
             })
           }
         })
-        .catch(err => {
-          console.log(err)
-          this.$message({
-            type: 'error',
-            message: '数据返回失败'
-          })
-        })
+        .catch(err => { console.log(err) })
     }
   }
 }
@@ -125,6 +147,7 @@ export default {
       width: 311px;
       height: 454px;
       color: #fff;
+      margin-top: 60px;
       .move-font {
         margin: 20px;
         text-align: center;
@@ -149,5 +172,8 @@ export default {
   height:10px;
   background: #ccc !important;
   border-radius:5px;
+}
+.contact {
+  margin-bottom: 20px !important;
 }
 </style>

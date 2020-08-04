@@ -25,7 +25,7 @@
         </div>
         <!--新闻资讯-->
           <div  v-if="rematchList.length!==0" v-show="activeIndex === 1" class="worksList">
-            <div v-for="(item,i) in rematchList" :key="i" class="works animated fadeIn delay-0.2s" @click="toDetails('news', item.Id)">
+            <div v-for="(item,i) in rematchList" :key="i" class="works animated fadeIn delay-0.2s" @click="toDetails(item, 'news')">
               <div class="worksBg" v-if="i % 2 === 0">
                 <el-col :xl='5' :lg="5" :md="5">
                   <div class="left-img">
@@ -68,7 +68,7 @@
           </div>
         <!-- 法律法规 -->
         <div v-if="awardList.length!==0" v-show="activeIndex === 2" class="worksList">
-          <div v-for="(item,i) in awardList" :key="i" class="works animated fadeIn delay-0.2s" @click="toDetails('re',item.Id)">
+          <div v-for="(item, i) in awardList" :key="i" class="works animated fadeIn delay-0.2s" @click="toDetails(item, 're')">
             <div class="worksBg">
               <el-col :xl='5' :lg="5" :md="5">
                 <div class="left-img">
@@ -187,8 +187,13 @@ export default {
       this.getReData()
     },
     /** 跳转到详情 */
-    toDetails (type, id) {
-      this.$router.push({ path: '/news/details', query: { id, type } })
+    toDetails (item, type) {
+      this.$router.push({
+        name: 'NewsDetail',
+        params: {
+          item, type
+        }
+      })
     },
     getBg () {
       getBgData()

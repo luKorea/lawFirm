@@ -47,9 +47,7 @@
       <!--    </el-col>-->
     </div>
     <div class="content">
-      <keep-alive>
         <router-view :key="key"/>
-      </keep-alive>
     </div>
     <ls-footer />
   </div>
