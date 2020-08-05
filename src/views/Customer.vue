@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import { getBgData, getCustomerData } from '../api/api'
+import { getBgData, getCustomerData } from '../api/api'
 
 export default {
   name: 'Customer',

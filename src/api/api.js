@@ -238,13 +238,13 @@ export const getNewsRegulationsDetailData = async (id) => {
  * @method getConsultationData
  */
 export const getConsultationData = async () => {
-  return await request.get('/consultation')
+  return await request.post(`${BASE_URL}/getConsult`)
 }
 
 /**
  * @description 发送案件
- * @method postMessage
+ * @method postData
  */
-export const postMessage = async (data) => {
-  return await request.post('/consultation', { data })
+export const postData = async (data) => {
+  return await request.post(`${BASE_URL}/addConsultdata`, { ...data })
 }

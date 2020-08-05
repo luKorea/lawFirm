@@ -19,11 +19,11 @@
           </div>
           <div class="input-container">
             <div class="top-font">メールアドレス</div>
-            <el-input v-model="formData.email" class='input-text' placeholder="邮箱" />
+            <el-input v-model="formData.mailbox" class='input-text' placeholder="邮箱" />
           </div>
           <div class="input-container">
             <div class="top-font">事件概況</div>
-            <el-input v-model="formData.desc" class='input-text' placeholder="案件概述" />
+            <el-input v-model="formData.summary" class='input-text' placeholder="案件概述" />
           </div>
           <el-input class="hidden-box" />
           <el-input class="hidden-box" />
@@ -31,31 +31,31 @@
         </el-form>
       </div>
       <div class="contact-content">
-        <span class="red-font">メールアドレス：Japan@kingpound.com</span>
-        <span class="red-font">電話番号：+86 20 38390333</span>
-        <span class="black-font">邮箱：Japan@kingpound.com</span>
-        <span class="black-font">联系电话：+86 20 38390333</span>
+        <span class="red-font">メールアドレス： {{ listInfo.jaMailbox }}</span>
+        <span class="red-font">電話番号：{{ listInfo.jaPhone }}</span>
+        <span class="black-font">邮箱：{{ listInfo.chMailbox }}</span>
+        <span class="black-font">联系电话：{{ listInfo.chPhone }}</span>
       </div>
       <div class="qrCode-content">
         <el-col :xl='3' :lg="24" :md="24" :sm="24">
           <div class="qrCode-item">
-            <img src="../assets/image/qrcode/qrcode_one.png" alt="">
-            <p class="small-red-font">金鵬公式アカウントQRコード</p>
-            <p>金鹏官方公众号二维码</p>
+            <img :src="imgUrl + listInfo.one.imgPathone" alt="">
+            <p class="small-red-font">{{ listInfo.one.jaimgNameone }}</p>
+            <p>{{ listInfo.one.chimgNameone }}</p>
           </div>
         </el-col>
         <el-col :xl='3' :lg="24" :md="24" :sm="24">
           <div class="qrCode-item">
-            <img src="../assets/image/qrcode/qrcode_two.png" alt="">
-            <p class="small-red-font">金鵬日本オフィス公式アカウントQRコード</p>
-            <p>金鹏日本办事处官方公众号二维码</p>
+            <img :src="imgUrl + listInfo.two.imgPathtwo" alt="">
+            <p class="small-red-font">{{ listInfo.two.jaimgNametwo }}</p>
+            <p>{{ listInfo.two.chimgNametwo }}</p>
           </div>
         </el-col>
         <el-col :xl='3' :lg="24" :md="24" :sm="24">
           <div class="qrCode-item">
-            <img src="../assets/image/qrcode/qrcode_three.png" alt="">
-            <p class="small-red-font">金鵬日本オフィス公式ツイッターQRコード</p>
-            <p>金鹏官方推特二维码</p>
+            <img :src="imgUrl + listInfo.three.imgPaththree" alt="">
+            <p class="small-red-font">{{ listInfo.three.jaimgNamethree }}</p>
+            <p>{{ listInfo.three.chimgNamethree }}</p>
           </div>
         </el-col>
       </div>
@@ -64,25 +64,36 @@
 </template>
 
 <script>
-import { getBgData } from '../api/api'
+import { getBgData, getConsultationData, postData } from '../api/api'
 
 export default {
   name: 'Consultation',
   data () {
     return {
+      listInfo: {},
       formData: {
         name: '',
-        email: '',
-        desc: ''
+        phone: '',
+        mailbox: '',
+        summary: ''
       },
       imgUrl: process.env.VUE_APP_IMAGE_URL,
       img: require('../assets/image/swipe/default.jpg')
     }
   },
   mounted () {
+    this.getData()
     this.getBg()
   },
   methods: {
+    getData () {
+      getConsultationData()
+        .then(data => {
+          this.listInfo = data
+          console.log(data)
+        })
+        .catch(err => console.log(err))
+    },
     getBg () {
       getBgData()
         .then(data => {
@@ -104,13 +115,18 @@ export default {
         })
     },
     onSubmit () {
-      if (this.formData.name && this.formData.email && this.formData.desc !== '') {
-        this.$message({
-          type: 'success',
-          message: '提交成功'
-        })
-        console.log(this.formData)
-        // this.formData = {}
+      if (this.formData.name && this.formData.mailbox &&
+        this.formData.summary !== '' && this.formData.phone !== ''
+      ) {
+        postData(this.formData)
+          .then(res => {
+            if (res.sign === 200) {
+              this.$message({
+                type: 'success',
+                message: res.msg
+              })
+            }
+          }).catch(err => console.log(err))
       } else {
         this.$message({
           type: 'error',

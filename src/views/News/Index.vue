@@ -27,12 +27,12 @@
           <div  v-if="rematchList.length!==0" v-show="activeIndex === 1" class="worksList">
             <div v-for="(item,i) in rematchList" :key="i" class="works animated fadeIn delay-0.2s" @click="toDetails(item, 'news')">
               <div class="worksBg" v-if="i % 2 === 0">
-                <el-col :xl='5' :lg="5" :md="5">
+                <el-col :xl='5' :lg="6" :md="24">
                   <div class="left-img">
                     <img :src="imgUrl + item.imgPath" alt />
                   </div>
                 </el-col>
-                <el-col :xl='12' :lg="12" :md="12">
+                <el-col :xl='12' :lg="12" :md="24">
                   <div class="right-content" style="margin-left: 43px;">
                     <div class="red">
                       <div class="content-red-title left-font">{{ item.jaTitle }}</div>
@@ -46,7 +46,7 @@
                 </el-col>
               </div>
               <div class="worksBg" v-else>
-                <el-col :xl='12' :lg="12" :md="12">
+                <el-col :xl='12' :lg="12" :md="24">
                   <div class="right-content" style="margin-right: 43px;">
                     <div class="red">
                       <div class="content-red-title left-font">{{ item.jaTitle }}</div>
@@ -58,7 +58,7 @@
                     </div>
                   </div>
                 </el-col>
-                <el-col :xl='5' :lg="5" :md="5">
+                <el-col :xl='5' :lg="6" :md="5">
                   <div class="left-img">
                     <img :src="imgUrl + item.imgPath" alt />
                   </div>
@@ -70,12 +70,12 @@
         <div v-if="awardList.length!==0" v-show="activeIndex === 2" class="worksList">
           <div v-for="(item, i) in awardList" :key="i" class="works animated fadeIn delay-0.2s" @click="toDetails(item, 're')">
             <div class="worksBg">
-              <el-col :xl='5' :lg="5" :md="5">
+              <el-col :xl='5' :lg="6" :md="24">
                 <div class="left-img">
                   <img :src="imgUrl + item.imgPath" />
                 </div>
               </el-col>
-              <el-col :xl='12' :lg="12" :md="12">
+              <el-col :xl='12' :lg="12" :md="24">
                 <div class="right-content" style="margin-left: 43px">
                   <div class="red">
                     <div class="content-red-title left-font">{{ item.jaTitle }}</div>
