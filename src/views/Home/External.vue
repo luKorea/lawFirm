@@ -51,7 +51,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/external') {
-                this.img = item.imgPath
+                this.img = this.imgUrl + item.imgPath
                 console.log(item.path)
               }
             })
@@ -59,10 +59,6 @@ export default {
         })
         .catch(err => {
           console.log(err)
-          this.$message({
-            type: 'error',
-            message: '数据返回失败'
-          })
         })
     }
   }

@@ -50,8 +50,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/news') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }

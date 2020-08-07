@@ -49,15 +49,9 @@ export default {
         .then(data => {
           if (data.length > 0) {
             this.serviceList = data
-            console.log(this.serviceList)
           } else this.serviceList = []
         })
-        .catch(err => {
-          this.$message({
-            type: 'error',
-            message: err
-          })
-        })
+        .catch(err => { console.log(err) })
     },
     getBg () {
       getBgData()
@@ -65,8 +59,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/teamService') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }

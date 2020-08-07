@@ -32,7 +32,7 @@
         :md="{span: 8}" :sm="{span: 6}"
       >
         <div class="qrCode">
-          <img class="img-item" :src="imgUrl + footerInfo.headquartersimgPath" alt=""/>
+          <img class="img-item" v-lazy="imgUrl + footerInfo.headquartersimgPath" alt=""/>
           <p>金鵬公式アカウントQRコード</p>
           <p>金鹏官方公众号二维码</p>
         </div>
@@ -42,7 +42,7 @@
         :md="{span: 8}" :sm="{span: 6}"
       >
         <div class="qrCode">
-          <img class="img-item" :src="imgUrl + footerInfo.branchimgPath" alt=""/>
+          <img class="img-item" v-lazy="imgUrl + footerInfo.branchimgPath" alt=""/>
           <p>金鵬日本オフィス公式アカウントQRコード</p>
           <p>金鹏日本办事处官方公众号二维码</p>
         </div>
@@ -68,12 +68,7 @@ export default {
         this.footerInfo = data
         console.log(this.footerInfo)
       })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
-        })
-      })
+      .catch(err => { console.log(err) })
   }
 }
 </script>

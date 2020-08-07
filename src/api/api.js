@@ -248,3 +248,11 @@ export const getConsultationData = async () => {
 export const postData = async (data) => {
   return await request.post(`${BASE_URL}/addConsultdata`, { ...data })
 }
+
+/**
+ * @description 获取地图数据
+ * @method getMapData
+ */
+export const getMapData = async () => {
+  return await request.post(`${BASE_URL}/getShall`)
+}

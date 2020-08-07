@@ -7,6 +7,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja' // lang i18n
 import './assets/common/index.css'
 
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad, {
+  preLoad: 2,
+  // error: require("./assets/error.png"),
+  // loading: require("./assets/loading.png"),
+  attempt: 1
+})
+
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 

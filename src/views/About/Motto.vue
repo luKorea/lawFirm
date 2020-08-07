@@ -46,10 +46,7 @@ export default {
           this.mottoInfo = data
         })
         .catch(err => {
-          this.$message({
-            type: 'error',
-            message: err
-          })
+         console.log(err)
         })
     },
     getBg () {
@@ -58,8 +55,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/motto') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }

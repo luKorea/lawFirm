@@ -37,12 +37,7 @@ export default {
         this.homeInfo = data
         console.log(this.homeInfo)
       })
-      .catch(err => {
-        this.$message({
-          type: 'error',
-          message: err
-        })
-      })
+      .catch(err => { console.log(err) })
   }
 }
 </script>

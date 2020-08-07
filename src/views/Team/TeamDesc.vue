@@ -49,12 +49,7 @@ export default {
         .then(data => {
           this.teamDescInfo = data
         })
-        .catch(err => {
-          this.$message({
-            type: 'error',
-            message: err
-          })
-        })
+        .catch(err => { console.log(err) })
     },
     getBg () {
       getBgData()
@@ -62,8 +57,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/teamDesc') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }

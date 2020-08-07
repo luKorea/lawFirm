@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-cloak>
     <logo />
     <div class="nav">
       <!--    <el-col :offset="4" :lg="24" :md="24" :sm="24">-->
@@ -100,12 +100,7 @@ export default {
           })
         } else this.configNav = []
       })
-        .catch(err => {
-          this.$message({
-            type: 'error',
-            message: err
-          })
-        })
+        .catch(err => { console.log(err) })
     },
     selected (index) {
       this.classA = index
@@ -140,6 +135,9 @@ export default {
 </script>
 
 <style lang="less">
+  [v-cloak] {
+    display: none;
+  }
 #app {
   width: 100%;
   height: 100%;

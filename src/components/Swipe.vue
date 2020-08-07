@@ -8,7 +8,7 @@
           :sm="24"
           :xs="24"
         >
-          <img ref="imgHeight" :src="imgUrl + item"  class="banner_img" />
+          <img ref="imgHeight" v-lazy="imgUrl + item"  class="banner_img" />
         </el-col>
       </el-row>
     </el-carousel-item>

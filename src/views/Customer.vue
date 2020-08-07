@@ -25,7 +25,7 @@
         </div>
         <div class="customer-img">
           <div class="customer-img-item" v-for="(item, index) in customerData.customerLogo" :key="index">
-            <img :src="imgUrl + item.imgPath" alt="">
+            <img v-lazy="imgUrl + item.imgPath" alt="">
           </div>
         </div>
       </el-col>
@@ -65,8 +65,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/customer') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }

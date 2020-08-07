@@ -23,13 +23,13 @@
                 <div class="move-font">
                   <span class="move-title">国内分所</span>
                   <div class="move-content">
-                    <div>{{ item.a }}</div>
-                    <div>{{ item.b }}</div>
-                    <div>地址：{{ item.c }}</div>
-                    <div>电话：{{ item.d }}</div>
-                    <div>Address：{{ item.e }}</div>
-                    <div>Tel: {{ item.f }}</div>
-                    <div>所在地：{{ item.g }}</div>
+                    <div>[ {{ item.chshallName }} ] {{ item.enshallName }}</div>
+                    <div>{{ item.jashallName }}</div>
+                    <div>地址：{{ item.jaAddress }}</div>
+                    <div>电话：{{ item.chPhone }}</div>
+                    <div>Address：{{ item.enAddress }}</div>
+                    <div>Tel: {{ item.enPhone }}</div>
+                    <div>所在地：{{ item.chAddress }} 電話番号：{{ item.jaPhone }}</div>
                   </div>
                 </div>
               </el-carousel-item>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { getBgData } from '../api/api'
+import { getBgData, getMapData } from '../api/api'
 import echarts from 'echarts'
 import world from 'echarts/map/json/world.json'
 
@@ -52,104 +52,34 @@ export default {
     return {
       mapChart: '',
       imgUrl: process.env.VUE_APP_IMAGE_URL,
+      path: 'path://M661.333333 320c0-83.2-66.133333-149.333333-149.333333-149.333333s-149.333333 66.133333-149.333333 149.333333 66.133333 149.333333 149.333333 149.333333 149.333333-66.133333 149.333333-149.333333z m-256 0c0-59.733333 46.933333-106.666667 106.666667-106.666667s106.666667 46.933333 106.666667 106.666667-46.933333 106.666667-106.666667 106.666667-106.666667-46.933333-106.666667-106.666667z',
       img: '',
-      data: [
-        {
-          name: '南京', // 城市name
-          value: [118.796252, 32.0739, 150], // 城市坐标 前两个经纬度 第三个value值
-          coords: [
-            [107.88, 22.863], // 起点城市坐标
-            [118.796252, 32.0739] // 终点城市坐标
-          ]
-        },
-        {
-          name: '西藏',
-          value: [91.11, 29.97, 100],
-          coords: [
-            [118.796252, 32.0739],
-            [91.11, 29.97]
-          ]
-        },
-        {
-          name: '广西',
-          value: [107.88, 22.863, 100],
-          coords: [
-            [118.796252, 32.0739],
-            [-93.310319, 36.908779]
-          ]
-        },
-        {
-          name: '美国',
-          value: [-93.310319, 36.908779, 100],
-          coords: [
-            [118.796252, 32.0739],
-            [-93.310319, 36.908779]
-          ]
-        }
-      ],
-      listData: [
-        {
-          a: '中山分所 Zhongshan Office',
-          b: '中山オフィス',
-          c: '中国中山市东区中山五路2号紫马奔腾广场3座17层',
-          d: '0760-87807999',
-          e: '1701, 3 Zima Pentium Square, No. 2 Zhongshan Wulu, Zhongshan East District, Zhongshan, China',
-          f: '+86 760-87807999',
-          g: '中山市東区中山五路2号紫馬奔騰広場3座17階電話番号：+86 760-87807999'
-        },
-        {
-          a: '中山分所 Zhongshan Office',
-          b: '中山オフィス',
-          c: '中国中山市东区中山五路2号紫马奔腾广场3座17层',
-          d: '0760-87807999',
-          e: '1701, 3 Zima Pentium Square, No. 2 Zhongshan Wulu, Zhongshan East District, Zhongshan, China',
-          f: '+86 760-87807999',
-          g: '中山市東区中山五路2号紫馬奔騰広場3座17階電話番号：+86 760-87807999'
-        },
-        {
-          a: '中山分所 Zhongshan Office',
-          b: '中山オフィス',
-          c: '中国中山市东区中山五路2号紫马奔腾广场3座17层',
-          d: '0760-87807999',
-          e: '1701, 3 Zima Pentium Square, No. 2 Zhongshan Wulu, Zhongshan East District, Zhongshan, China',
-          f: '+86 760-87807999',
-          g: '中山市東区中山五路2号紫馬奔騰広場3座17階電話番号：+86 760-87807999'
-        },
-        {
-          a: '中山分所 Zhongshan Office',
-          b: '中山オフィス',
-          c: '中国中山市东区中山五路2号紫马奔腾广场3座17层',
-          d: '0760-87807999',
-          e: '1701, 3 Zima Pentium Square, No. 2 Zhongshan Wulu, Zhongshan East District, Zhongshan, China',
-          f: '+86 760-87807999',
-          g: '中山市東区中山五路2号紫馬奔騰広場3座17階電話番号：+86 760-87807999'
-        }
-      ],
+      data: [],
+      listData: [],
       options: {}
     }
   },
   watch: {
     // 观察option的变化
     options: {
-      handler (newVal, oldVal) {
+      'handler' (newVal, oldVal) {
         if (this.mapChart) {
           if (newVal) {
-            console.log(newVal)
             this.mapChart.setOption(newVal)
           } else {
-            console.log(oldVal)
             this.mapChart.setOption(oldVal)
           }
         } else {
           this.createMap()
         }
       },
-      deep: true // 对象内部属性的监听，关键。
+      'deep': true // 对象内部属性的监听，关键。
     }
   },
   mounted () {
-    this.$nextTick(() => this.createMap())
     this.getBg()
+    this.getData()
+    this.createMap()
   },
   beforeDestroy () {
     if (!this.mapChart) {
@@ -159,6 +89,15 @@ export default {
     this.mapChart = null
   },
   methods: {
+    getData () {
+      getMapData()
+        .then(data => {
+          this.listData = data.listData
+          this.options.series[0].data = data.data
+          this.options.series[1].data = data.data
+          // this.data = data.data
+        }).catch(err => console.log(err))
+    },
     // TODO 点击每一项的时候，将地图对应的点高亮
     lightMap (index) {
       this.options.series[0].data.forEach((item, i) => {
@@ -175,7 +114,6 @@ export default {
       this.mapChart = echarts.init(dom)
       echarts.registerMap('world', world)/* 注册world地图 */
       this.options = {
-        color: ['#b5b3b3'],
         // 要显示散点图，必须填写这个配置
         geo: {
           show: true, // 是否显示地理坐标系组件
@@ -201,11 +139,14 @@ export default {
           {
             type: 'scatter',
             coordinateSystem: 'geo',
+            color: ['#ccc'],
             symbolSize: val => {
-              return val[2] / 10
+              return val[2] / 5
             },
             mapType: 'world',
             data: this.data,
+            animationDuration: 0,
+            symbol: 'path://M569.6 838.4c89.6-128 256-396.8 256-524.8 0-166.4-134.4-307.2-307.2-307.2S211.2 147.2 211.2 313.6c0 121.6 166.4 390.4 256 524.8C492.8 870.4 544 870.4 569.6 838.4zM326.4 313.6c0-102.4 83.2-192 192-192 102.4 0 192 83.2 192 192s-83.2 192-192 192C416 499.2 326.4 416 326.4 313.6zM633.6 313.6c0-64-51.2-115.2-115.2-115.2S403.2 249.6 403.2 313.6c0 64 51.2 115.2 115.2 115.2S633.6 377.6 633.6 313.6zM672 723.2c-12.8 19.2-25.6 38.4-38.4 57.6 102.4 19.2 153.6 51.2 153.6 70.4 0 25.6-96 83.2-275.2 83.2s-275.2-57.6-275.2-83.2c0-19.2 51.2-57.6 153.6-70.4-12.8-19.2-25.6-38.4-38.4-57.6-102.4 19.2-179.2 64-179.2 128 0 96 166.4 140.8 332.8 140.8s332.8-51.2 332.8-140.8C851.2 787.2 774.4 742.4 672 723.2z',
             symbolKeepAspect: true,
             hoverAnimation: false // 鼠标移入放大圆
           },
@@ -231,7 +172,6 @@ export default {
             this.setActiveItem(index)
           }
         })
-        console.log(params)
       })
       this.mapChart.setOption(this.options)
     },
@@ -244,8 +184,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/contact') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }

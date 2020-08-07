@@ -14,7 +14,7 @@
             <!--左边头像-->
             <div class="avatar-content">
               <div class='avatar'>
-                <img :src="imgUrl + item.imgPath" alt="">
+                <img v-lazy="imgUrl + item.imgPath" alt="">
               </div>
               <div class="avatar-red-title">{{ item.jateamName }}</div>
               <div class="avatar-black-title">{{ item.chteamName }} {{ item.jateamPost }}</div>
@@ -67,12 +67,7 @@ export default {
             this.memberInfo = data
           } else this.memberInfo = []
         })
-        .catch(err => {
-          this.$message({
-            type: 'error',
-            message: err
-          })
-        })
+        .catch(err => { console.log(err) })
     },
     getBg () {
       getBgData()
@@ -80,8 +75,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/teamMember') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }

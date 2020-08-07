@@ -29,7 +29,7 @@
               <div class="worksBg" v-if="i % 2 === 0">
                 <el-col :xl='5' :lg="6" :md="24">
                   <div class="left-img">
-                    <img :src="imgUrl + item.imgPath" alt />
+                    <img v-lazy="imgUrl + item.imgPath" alt />
                   </div>
                 </el-col>
                 <el-col :xl='12' :lg="12" :md="24">
@@ -60,7 +60,7 @@
                 </el-col>
                 <el-col :xl='5' :lg="6" :md="5">
                   <div class="left-img">
-                    <img :src="imgUrl + item.imgPath" alt />
+                    <img v-lazy="imgUrl + item.imgPath" alt />
                   </div>
                 </el-col>
               </div>
@@ -72,7 +72,7 @@
             <div class="worksBg">
               <el-col :xl='5' :lg="6" :md="24">
                 <div class="left-img">
-                  <img :src="imgUrl + item.imgPath" />
+                  <img v-lazy="imgUrl + item.imgPath" />
                 </div>
               </el-col>
               <el-col :xl='12' :lg="12" :md="24">
@@ -201,8 +201,7 @@ export default {
           if (data.length > 0) {
             data.forEach(item => {
               if (item.path === '/news') {
-                this.img = item.imgPath
-                console.log(item.path)
+                this.img = this.imgUrl + item.imgPath
               }
             })
           }
