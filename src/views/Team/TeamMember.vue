@@ -8,34 +8,35 @@
           <el-divider><span class="red-font">チームメンバー紹介</span></el-divider>
           <div class="black-font">团队成员介绍</div>
         </div>
-        <el-divider />
-        <div v-for="(item, index) in memberInfo" class="user-info" :key='index'>
-          <div class="avatar-container">
-            <!--左边头像-->
-            <div class="avatar-content">
-              <div class='avatar'>
-                <img v-lazy="imgUrl + item.imgPath" alt="">
+        <div class="content">
+          <div v-for="(item, index) in memberInfo" class="user-info" :key='index'>
+            <div class="avatar-container">
+              <!--左边头像-->
+              <div class="avatar-content">
+                <div class='avatar'>
+                  <img v-lazy="imgUrl + item.imgPath" alt="">
+                </div>
+                <div class="avatar-red-title">{{ item.jateamName }}</div>
+                <div class="avatar-black-title">{{ item.chteamName }} {{ item.jateamPost }}</div>
               </div>
-              <div class="avatar-red-title">{{ item.jateamName }}</div>
-              <div class="avatar-black-title">{{ item.chteamName }} {{ item.jateamPost }}</div>
-            </div>
-            <!--右边列表-->
-            <div class="avatar-list">
-              <div v-for="(skip, index) in item.teammemberDetails" :key="index">
-                <div class="red">{{ skip.jaContent }}</div>
-                <div class="black">{{ skip.chContent }}</div>
+              <!--右边列表-->
+              <div class="avatar-list">
+                <div v-for="(skip, index) in item.teammemberDetails" :key="index">
+                  <div class="red">{{ skip.jaContent }}</div>
+                  <div class="black">{{ skip.chContent }}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="red-content left-font m-bottom">
-            <el-col :lg="24" :md="24" :xl="24" :sm="24">
-              <div v-html="item.jateamValue"></div>
-            </el-col>
-          </div>
-          <div class="black-content left-font">
-            <el-col :lg="24" :md="24" :xl="24" :sm="24">
-              <div v-html="item.chteamValue"></div>
-            </el-col>
+            <div class="red-content left-font m-bottom">
+              <el-col :lg="24" :md="24" :xl="24" :sm="24">
+                <div v-html="item.jateamValue"></div>
+              </el-col>
+            </div>
+            <div class="black-content left-font">
+              <el-col :lg="24" :md="24" :xl="24" :sm="24">
+                <div v-html="item.chteamValue"></div>
+              </el-col>
+            </div>
           </div>
         </div>
       </el-col>
@@ -158,5 +159,11 @@ export default {
       border-radius: 50%;
       background-color: #ccc;
     }
+  }
+  .content {
+    border:1px solid rgba(221,221,221,1);
+    border-radius:10px;
+    padding: 5px;
+    box-sizing: border-box;
   }
 </style>

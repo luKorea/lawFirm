@@ -61,7 +61,7 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 66px 0 80px 0;
+    margin: 30px 0 20px 0;
     font-size: 18px;
     line-height: 35px;
     color: #932026;
@@ -188,12 +188,18 @@ ul, li {
 
 .el-tabs--left .el-tabs__item.is-left {
     border:1px solid rgba(221,221,221,1);
-    margin-bottom: 10px;
     font-size: 16px;
     text-align: left;
     height: 72px;
     transform: none;
 }
+
+.el-tabs__content {
+    border:1px solid rgba(221,221,221,1);
+    padding: 5px;
+    box-sizing: border-box;
+}
+
 .el-tabs--left .el-tabs__active-bar.is-left, .el-tabs--left .el-tabs__active-bar.is-right,
 .el-tabs--right .el-tabs__active-bar.is-left, .el-tabs--right .el-tabs__active-bar.is-right {
     top: 0;

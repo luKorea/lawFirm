@@ -14,24 +14,24 @@
               <span :class="String(item.Id) !== activeName ? 's-red-font' : 'bw-red-font'">{{ item.japaneseName }}</span>
               <span :class="String(item.Id) !== activeName ? 's-black-font' : 'bw-black-font'">{{ item.chineseName }}</span>
             </div>
-            <div class="title">
-              <div class="red-font">{{ item.japaneseName }}</div>
-              <div class="black-font">{{ item.chineseName }}</div>
-            </div>
-            <div class="red-content left-font">
-              <el-col :lg="24" :xm="24" :sm="24">
-                <div v-for="(red, index) in item.getAreadetails" :key="index">
-                  <div class="before-red-item">{{ red.japaneseDetails }}</div>
-                </div>
-              </el-col>
-            </div>
-            <div class="black-content left-font">
-              <el-col :lg="24" :xm="24" :sm="24">
-                <div v-for="(black, index) in item.getAreadetails" :key="index">
-                  <div class="before-black-item">{{ black.chineseDetails }}</div>
-                </div>
-              </el-col>
-            </div>
+              <div class="title">
+                <div class="red-font">{{ item.japaneseName }}</div>
+                <div class="black-font">{{ item.chineseName }}</div>
+              </div>
+              <div class="red-content left-font">
+                <el-col :lg="24" :xm="24" :sm="24">
+                  <div v-for="(red, index) in item.getAreadetails" :key="index">
+                    <div class="before-red-item">{{ red.japaneseDetails }}</div>
+                  </div>
+                </el-col>
+              </div>
+              <div class="black-content left-font">
+                <el-col :lg="24" :xm="24" :sm="24">
+                  <div v-for="(black, index) in item.getAreadetails" :key="index">
+                    <div class="before-black-item">{{ black.chineseDetails }}</div>
+                  </div>
+                </el-col>
+              </div>
           </el-tab-pane>
         </el-tabs>
       </el-col>
@@ -127,4 +127,5 @@ export default {
     background-color: #333;
   }
 }
+
 </style>

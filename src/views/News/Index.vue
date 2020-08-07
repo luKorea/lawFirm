@@ -33,7 +33,7 @@
                   </div>
                 </el-col>
                 <el-col :xl='12' :lg="12" :md="24">
-                  <div class="right-content" style="margin-left: 43px;">
+                  <div class="right-content">
                     <div class="red">
                       <div class="content-red-title left-font">{{ item.jaTitle }}</div>
                       <div class="content-red-text left-font">{{ item.jaDetails }}</div>
@@ -47,7 +47,7 @@
               </div>
               <div class="worksBg" v-else>
                 <el-col :xl='12' :lg="12" :md="24">
-                  <div class="right-content" style="margin-right: 43px;">
+                  <div class="right-content">
                     <div class="red">
                       <div class="content-red-title left-font">{{ item.jaTitle }}</div>
                       <div class="content-red-text left-font">{{ item.jaDetails }}</div>
@@ -76,7 +76,7 @@
                 </div>
               </el-col>
               <el-col :xl='12' :lg="12" :md="24">
-                <div class="right-content" style="margin-left: 43px">
+                <div class="right-content">
                   <div class="red">
                     <div class="content-red-title left-font">{{ item.jaTitle }}</div>
                     <div class="content-red-text left-font">{{ item.jaContent }}</div>

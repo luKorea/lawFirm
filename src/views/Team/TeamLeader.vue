@@ -8,29 +8,30 @@
           <el-divider><span class="red-font">チーム担当者紹介</span></el-divider>
           <div class="black-font">团队负责人介绍</div>
         </div>
-        <el-divider />
-        <div class="avatar-container">
-          <!--左边头像-->
-          <div class="avatar-content">
-            <div class='avatar'>
-              <img v-lazy="imgUrl + leaderData.imgPath" alt="">
+        <div class="content">
+          <div class="avatar-container">
+            <!--左边头像-->
+            <div class="avatar-content">
+              <div class='avatar'>
+                <img v-lazy="imgUrl + leaderData.imgPath" alt="">
+              </div>
+              <div class="avatar-red-title">{{ leaderData.jateamName }}</div>
+              <div class="avatar-black-title">{{ leaderData.chteamName }} {{ leaderData.jateamPost }}</div>
             </div>
-            <div class="avatar-red-title">{{ leaderData.jateamName }}</div>
-            <div class="avatar-black-title">{{ leaderData.chteamName }} {{ leaderData.jateamPost }}</div>
-          </div>
-          <!--右边列表-->
-          <div class="avatar-list">
-            <div v-for="(item, index) in leaderData.teamleadDetails" :key="index">
-              <div class="red">{{ item.jaContent }}</div>
-              <div class="black">{{ item.chContent }}</div>
+            <!--右边列表-->
+            <div class="avatar-list">
+              <div v-for="(item, index) in leaderData.teamleadDetails" :key="index">
+                <div class="red">{{ item.jaContent }}</div>
+                <div class="black">{{ item.chContent }}</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="red-content left-font m-bottom">
-          <el-col :lg="24" :md="24" :xl="24" :sm="24">{{ leaderData.jateamValue }}</el-col>
-        </div>
-        <div class="black-content left-font">
-          <el-col :lg="24" :md="24" :xl="24" :sm="24">{{ leaderData.chteamValue }}</el-col>
+          <div class="red-content left-font m-bottom">
+            <el-col :lg="24" :md="24" :xl="24" :sm="24">{{ leaderData.jateamValue }}</el-col>
+          </div>
+          <div class="black-content left-font">
+            <el-col :lg="24" :md="24" :xl="24" :sm="24">{{ leaderData.chteamValue }}</el-col>
+          </div>
         </div>
       </el-col>
     </div>
@@ -148,4 +149,10 @@ export default {
       background-color: #ccc;
     }
   }
+.content {
+  border:1px solid rgba(221,221,221,1);
+  border-radius:10px;
+  padding: 5px;
+  box-sizing: border-box;
+}
 </style>
