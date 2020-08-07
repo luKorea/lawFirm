@@ -78,7 +78,7 @@ export default {
         summary: ''
       },
       imgUrl: process.env.VUE_APP_IMAGE_URL,
-      img: require('../assets/image/swipe/default.jpg')
+      img: ''
     }
   },
   mounted () {
@@ -99,7 +99,7 @@ export default {
         .then(data => {
           if (data.length > 0) {
             data.forEach(item => {
-              if (item.path === '/consultaion') {
+              if (item.path === '/consultation') {
                 this.img = this.imgUrl + item.imgPath
               }
             })

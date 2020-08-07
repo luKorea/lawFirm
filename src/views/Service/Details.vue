@@ -49,7 +49,7 @@ export default {
       activeName: '',
       list: [],
       imgUrl: process.env.VUE_APP_IMAGE_URL,
-      img: require('../../assets/image/swipe/default.jpg')
+      img: ''
     }
   },
   mounted () {

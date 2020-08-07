@@ -1,7 +1,7 @@
 <!-- TODO 完成 -->
 <template>
   <div class="wrap-container">
-    <div class="bg-container" :style="{background: 'url( '+ img +') !important'}"></div>
+    <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="title">
       <div class="big-title">{{ externalInfo.japaneseHeadline }}</div>
       <div class="small-title">{{ externalInfo.chineseHeadline }}</div>

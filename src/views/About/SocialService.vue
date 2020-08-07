@@ -48,7 +48,7 @@ export default {
     return {
       dataList: [],
       imgUrl: process.env.VUE_APP_IMAGE_URL,
-      img: require('../../assets/image/swipe/default.jpg'),
+      img: '',
       page: {
         Display_Page_Number: 5,
         PageNumber: 1,

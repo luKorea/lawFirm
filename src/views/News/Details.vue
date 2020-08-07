@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       imgUrl: process.env.VUE_APP_IMAGE_URL,
-      img: require('../../assets/image/swipe/default.jpg'),
+      img: '',
       detailInfo: {},
       type: ''
     }
