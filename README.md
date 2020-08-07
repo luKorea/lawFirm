@@ -1,24 +1,7 @@
-# lssw-web
+# 律师事务所项目
 
-## Project setup
-```
-npm install
-```
+1. 蓝湖地址: https://lanhuapp.com/url/ncbm2-ClJO5
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+2. 线上地址：http://lawfirm.gzbigbang.cn/#/
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+3. 管理端线上地址： http://lawfirm.gzbigbang.cn/lsmswebsite/
