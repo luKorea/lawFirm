@@ -10,12 +10,12 @@
         </div>
         <div class="red-content left-font">
           <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <div>{{ missionInfo.japaneseContent }}</div>
+            <div v-html="missionInfo.japaneseContent"></div>
           </el-col>
         </div>
         <div class="black-content left-font">
           <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <div>{{ missionInfo.chineseContent }}</div>
+            <div v-html="missionInfo.chineseContent"></div>
           </el-col>
         </div>
       </el-col>

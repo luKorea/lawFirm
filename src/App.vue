@@ -56,7 +56,7 @@
 <script>
 import Logo from './components/Logo'
 import LsFooter from './components/Footer'
-import { getD, getNavData } from './api/api'
+import { getNavData } from './api/api'
 
 export default {
   name: 'app',

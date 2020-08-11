@@ -27,10 +27,14 @@
             </div>
           </div>
           <div class="red-content left-font m-bottom">
-            <el-col :lg="24" :md="24" :xl="24" :sm="24">{{ leaderData.jateamValue }}</el-col>
+            <el-col :lg="24" :md="24" :xl="24" :sm="24">
+              <div v-html="leaderData.jateamValue"></div>
+            </el-col>
           </div>
           <div class="black-content left-font">
-            <el-col :lg="24" :md="24" :xl="24" :sm="24">{{ leaderData.chteamValue }}</el-col>
+            <el-col :lg="24" :md="24" :xl="24" :sm="24">
+              <div v-html="leaderData.chteamValue"></div>
+            </el-col>
           </div>
         </div>
       </el-col>

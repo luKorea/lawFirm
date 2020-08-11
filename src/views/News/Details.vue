@@ -10,14 +10,14 @@
         </div>
         <div class="red-content left-font">
           <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <span v-if="type === 'news'">{{ detailInfo.jaDetails }}</span>
-            <span v-else>{{ detailInfo.jaContent }}</span>
+            <span v-if="type === 'news'" v-html="detailInfo.jaDetails"></span>
+            <span v-else v-html="detailInfo.jaContent"></span>
           </el-col>
         </div>
         <div class="black-content left-font">
           <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <span v-if="type === 'news'">{{ detailInfo.chDetails }}</span>
-            <span v-else>{{ detailInfo.chContent }}</span>
+            <span v-if="type === 'news'" v-html="detailInfo.chDetails"></span>
+            <span v-else v-html="detailInfo.chContent"></span>
           </el-col>
         </div>
       </el-col>

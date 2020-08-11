@@ -10,12 +10,12 @@
         </div>
         <div class="red-content left-font">
           <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <div>{{ superiorityInfo.japaneseContent }}</div>
+            <div v-html="superiorityInfo.japaneseContent"></div>
           </el-col>
         </div>
         <div class="black-content left-font">
           <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <div>{{ superiorityInfo.chineseContent }}</div>
+            <div v-html="superiorityInfo.chineseContent"></div>
           </el-col>
         </div>
       </el-col>

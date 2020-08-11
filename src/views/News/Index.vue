@@ -36,11 +36,11 @@
                   <div class="right-content">
                     <div class="red">
                       <div class="content-red-title left-font">{{ item.jaTitle }}</div>
-                      <div class="content-red-text left-font">{{ item.jaDetails }}</div>
+                      <div class="content-red-text left-font" v-html="item.jaDetails"></div>
                     </div>
                     <div class="black">
                       <div class="content-black-title left-font">{{ item.chTitle }}</div>
-                      <div class="content-black-text left-font">{{ item.chDetails }}</div>
+                      <div class="content-black-text left-font" v-html="item.chDetails"></div>
                     </div>
                   </div>
                 </el-col>

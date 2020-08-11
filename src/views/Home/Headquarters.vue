@@ -8,12 +8,12 @@
     </div>
     <div class="red-content left-font">
       <el-col :lg="12" :md="12" :xl="12" :sm="24">
-        <div>{{ headquartersInfo.japaneseContent }}</div>
+        <div v-html="headquartersInfo.japaneseContent"></div>
       </el-col>
     </div>
     <div class="black-content left-font">
       <el-col :lg="12" :md="12" :xl="12" :sm="24">
-        <div>{{ headquartersInfo.chineseContent }}</div>
+        <div v-html="headquartersInfo.chineseContent"></div>
       </el-col>
     </div>
   </div>
