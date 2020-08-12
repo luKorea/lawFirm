@@ -2,33 +2,62 @@
   <div>
     <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="team-service-container">
-      <el-col :lg="12" :md="12" :xl="12" :sm="24">
+      <el-col :lg="24" :md="24" :xl="24" :sm="24">
         <div class="title">
           <el-divider><span class="red-font">チーム業務分野</span></el-divider>
           <div class="black-font">团队服务领域</div>
         </div>
-        <!--单栏显示-->
-        <el-col :lg="24" :md="24" :xl="24" :sm="24">
-          <template v-for="item in serviceList">
-            <div class="content1">
+        <div class="content-one">
+          <div v-for="(item, index) in serviceList">
+            <div class="content1" v-if="index===0">
               <div class="top-content">
                 <div class="top">{{ item.japaneseName }}</div>
                 <div class="bottom">{{ item.chineseName }}</div>
               </div>
-              <div class="content-item" v-for="(item, index) in item.details" :key="index">
-                <div class="red">{{ item.jaContent }}</div>
-                <div class="black">{{ item.chContent }}</div>
+              <div class="content1-item">
+                <div class="red1-content">
+                <template v-for="item in item.details">
+                  <div>{{ item.jaContent }}</div>
+                </template>
+                </div>
+                <div class="black1-content">
+                <template v-for="item in item.details">
+                  <div>{{ item.chContent }}</div>
+                </template>
+                </div>
               </div>
             </div>
-          </template>
-        </el-col>
+          </div>
+        </div>
+        <div class="content-two">
+          <div v-for="(item, index) in serviceList">
+            <div class="content1" v-if="index!==0">
+              <div class="top-content">
+                <div class="top">{{ item.japaneseName }}</div>
+                <div class="bottom">{{ item.chineseName }}</div>
+              </div>
+              <div class="content1-item">
+                <div class="red1-content">
+                  <template v-for="item in item.details">
+                    <div>{{ item.jaContent }}</div>
+                  </template>
+                </div>
+                <div class="black1-content">
+                  <template v-for="item in item.details">
+                    <div>{{ item.chContent }}</div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </el-col>
     </div>
   </div>
 </template>
 
 <script>
-  import { getBgData, getTeamServiceData } from '../../api/api'
+import { getBgData, getTeamServiceData } from '../../api/api'
 
 export default {
   name: 'TeamService',
@@ -77,7 +106,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  width: 1100px;
+  margin: 0 auto;
   .top-content {
     display: flex;
     justify-content: center;
@@ -118,6 +148,7 @@ export default {
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
+    text-align: left;
     .red {
       color: #932026;
       font-size:18px;
@@ -132,11 +163,44 @@ export default {
       line-height:35px;
     }
   }
-  .content2 {
+  .content-2 {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
+  .content1-item {
     display: flex;
     justify-content: center;
-    align-items: center;
+  }
+  .content-two {
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+  .red1-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    line-height: 35px;
+    color: #932026;
+    text-align: left;
+    text-indent: 2em;
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+  .black1-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    line-height: 35px;
+    color: #333;
+    text-align: left;
+    text-indent: 2em;
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+  .content1-item {
+    display: flex;
   }
 }
 </style>

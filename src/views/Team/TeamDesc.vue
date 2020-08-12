@@ -8,10 +8,6 @@
           <el-divider><span class="red-font">{{ teamDescInfo.japaneseHeadline }}</span></el-divider>
           <div class="black-font">{{ teamDescInfo.chineseHeadline }}</div>
         </div>
-        <div class="ftitle">
-          <div class="red-font">{{ teamDescInfo.japaneseHeadline }}</div>
-          <div class="black-font">{{ teamDescInfo.chineseHeadline }}</div>
-        </div>
         <div class="red-content left-font m-bottom">
           <el-col :lg="24" :md="24" :xl="24" :sm="24">
             <div v-html="teamDescInfo.japaneseContent"></div>

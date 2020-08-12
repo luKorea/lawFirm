@@ -9,7 +9,6 @@ const startLoading = () => {
   /* 开场动画 */
   loading = Loading.service({
     lock: true,
-    text: '正在加载...客官请稍等...',
     background: 'rgba(245,239,239, 1)'
   })
 }

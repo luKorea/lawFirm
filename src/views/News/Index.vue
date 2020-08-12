@@ -131,11 +131,11 @@ export default {
       imgUrl: process.env.VUE_APP_IMAGE_URL,
       img: '',
       page: {
-        Display_Page_Number: 5,
+        Display_Page_Number: 20,
         PageNumber: 1
       },
       page1: {
-        Display_Page_Number: 5,
+        Display_Page_Number: 20,
         PageNumber: 1
       },
       activeIndex: 1,

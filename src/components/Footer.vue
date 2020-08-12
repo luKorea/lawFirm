@@ -1,52 +1,28 @@
 <template>
 <div class="footer">
     <div class="footer-content">
-      <el-col
-        :lg="{span: 6}"
-        :md="{span: 8, offset: 2}"
-        :sm="{span: 8, offset: 2}"
-        :xs="{span: 24, offset: 4}"
-      >
         <div class="left-content">
           <p>{{ footerInfo.chineseName }}</p>
           <p>地址：{{ footerInfo.chineseAddress }}</p>
           <p>邮箱：{{ footerInfo.chinesePostbox }}</p>
           <p>联系电话：{{ footerInfo.chinesePhone }}</p>
         </div>
-      </el-col>
-      <el-col
-        :lg="{span: 6}"
-        :md="{span: 8, offset: 2}"
-        :sm="{span: 8, offset: 2}"
-        :xs="{span: 24, offset: 4}"
-      >
         <div class="center-content">
           <p>{{ footerInfo.japaneseName }}</p>
           <p>所在地：{{ footerInfo.japaneseAddress }}</p>
           <p>メールアドレス：{{ footerInfo.japanesePostbox }}</p>
           <p>電話番号：{{ footerInfo.japanesePhone }}</p>
         </div>
-      </el-col>
-      <el-col
-        :lg="4" :xl="4"
-        :md="{span: 8}" :sm="{span: 6}"
-      >
-        <div class="qrCode">
+        <div class="qrCode" style="margin-right: 10px">
           <img class="img-item" v-lazy="imgUrl + footerInfo.headquartersimgPath" alt=""/>
           <p>金鵬公式アカウントQRコード</p>
           <p>金鹏官方公众号二维码</p>
         </div>
-      </el-col>
-      <el-col
-        :lg="4"  :xl="4"
-        :md="{span: 8}" :sm="{span: 6}"
-      >
         <div class="qrCode">
           <img class="img-item" v-lazy="imgUrl + footerInfo.branchimgPath" alt=""/>
           <p>金鵬日本オフィス公式アカウントQRコード</p>
           <p>金鹏日本办事处官方公众号二维码</p>
         </div>
-      </el-col>
     </div>
   </div>
 </template>
@@ -90,13 +66,14 @@ export default {
       flex-wrap: wrap;
       .left-content {
         text-align: left;
+        margin-right: 10px;
       }
       .center-content {
         text-align: left;
       }
       p {
         line-height: 30px;
-        font-size:16px;
+        font-size:14px;
         color:rgba(255,255,255,1);
       }
       img {

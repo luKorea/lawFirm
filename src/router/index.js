@@ -98,11 +98,6 @@ const routes = [
     component: () => import('../views/Team/layout'),
     children: [
       {
-        path: '/team',
-        name: 'Team',
-        component: () => import('@/views/Team/TeamDesc')
-      },
-      {
         path: '/teamDesc',
         name: 'TeamDesc',
         component: () => import('@/views/Team/TeamDesc')

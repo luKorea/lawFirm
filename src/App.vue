@@ -140,15 +140,10 @@ export default {
   }
 #app {
   width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: auto;
   .content {
     width: 100%;
     flex: 1;

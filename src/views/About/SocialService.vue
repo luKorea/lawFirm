@@ -9,19 +9,15 @@
           <div class="small-title">金鹏律师曾经和正在担任的社会职务</div>
         </div>
         <div class="item-flex">
-          <div class="red-content left-font">
-            <el-col :lg="24" :md="24" :xl="24" :sm="24">
+          <div class="red1-content left-font">
               <template v-for="item in dataList">
                 <div>- {{ item.jadutiesName }}</div>
               </template>
-            </el-col>
           </div>
-          <div class="black-content left-font">
-            <el-col :lg="24" :md="24" :xl="24" :sm="24">
+          <div class="black1-content left-font">
               <template v-for="item in dataList">
                 <div>- {{ item.chdutiesName }}</div>
               </template>
-            </el-col>
           </div>
         </div>
         <pagination
@@ -50,7 +46,7 @@ export default {
       imgUrl: process.env.VUE_APP_IMAGE_URL,
       img: '',
       page: {
-        Display_Page_Number: 5,
+        Display_Page_Number: 20,
         PageNumber: 1,
         total: 0
       }
@@ -113,4 +109,29 @@ export default {
       justify-content: center;
     }
   }
+  .red1-content {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0 20px 0;
+    font-size: 18px;
+    line-height: 35px;
+    color: #932026;
+    text-align: left;
+    text-indent: 2em;
+    word-break:keep-all;       /* 不换行 */
+    white-space:nowrap;        /* 不换行 */
+  }
+  .black1-content {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0 20px 0;
+    font-size: 16px;
+    line-height: 35px;
+    color: #333;
+    text-align: left;
+    text-indent: 2em;
+    word-break:keep-all;       /* 不换行 */
+    white-space:nowrap;        /* 不换行 */
+  }
+
 </style>

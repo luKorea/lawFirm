@@ -6,8 +6,7 @@
       background
       :current-page="offset"
       :page-size="pageSize"
-      :page-sizes="[5, 10, 20, 30]"
-      layout="prev, pager, next, sizes, jumper"
+      layout="prev, pager, next, jumper"
       :total="total">
     </el-pagination>
   </div>

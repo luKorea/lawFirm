@@ -15,8 +15,8 @@
           传真：{{ homeInfo.Chfax }}
         </p>
         <p>
-          郵便番号：{{ homeInfo.Jaemail }}
-          Eメール：{{ homeInfo.Japostcode }}
+          郵便番号：{{ homeInfo.Japostcode }}
+          Eメール：{{ homeInfo.Jaemail }}
           電話：{{ homeInfo.Japhone }}
           ファックス：{{ homeInfo.Jafax }}
         </p>
