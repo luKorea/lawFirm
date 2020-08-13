@@ -3,20 +3,12 @@
   <div>
     <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="customer-container">
-      <el-col
-        :xl="14"
-        :lg="24"
-        :md="24"
-        :sm="24"
-        :xs="24"
-      >
         <div class="center-title">
           <el-divider><span class="red-font">クライアント</span></el-divider>
           <div class="black-font">重要客户</div>
         </div>
         <div class="customer-content">
           <div class="content-item" v-for="(item, index) in customerData.customerName" :key="index">
-            <span class="left-block"></span>
             <div>
               <p class="customer-red-font">{{ item.jaCustomer }}</p>
               <p class="customer-black-font left-font">{{ item.chCustomer }}</p>
@@ -28,7 +20,6 @@
             <img v-lazy="imgUrl + item.imgPath" alt="">
           </div>
         </div>
-      </el-col>
     </div>
   </div>
 </template>
@@ -81,20 +72,27 @@ export default {
 <style scoped lang="less">
   .customer-container {
     display: flex;
+    flex-direction: column;
+    width: 1600px;
+    margin: 0 auto;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     text-align: center;
+    box-sizing: border-box;
     .customer-content {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       margin: 66px 0 80px 0;
       font-size: 18px;
-      text-align: center;
+      text-align: left;
       line-height: 35px;
       .content-item {
         display: flex;
+        width: 465px;
+        flex-wrap: wrap;
         flex-direction: row;
         margin: 20px;
         line-height: 30px;
@@ -113,6 +111,15 @@ export default {
           color: #932026;
           font-size: 20px;
         }
+        .customer-red-font:before {
+          content: '';
+          display: inline-block;
+          margin-right: 5px;
+          width: 20px;
+          height: 20px;
+          background-color: #6a1d21;
+        }
+
         .customer-black-font {
           color: #333333;
           font-size: 18px;
@@ -121,15 +128,16 @@ export default {
     }
     .customer-img {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       flex-wrap: wrap;
-      margin: 10px;
+      margin: 0 auto;
+      width: 1200px;
       .customer-img-item {
         width:238px;
         height:90px;
         border:1px solid rgba(153,153,153,1);
         border-radius:10px;
-        margin: 10px;
+        margin: 20px 30px;
         padding: 5px 0;
         img {
           width: 100%;
