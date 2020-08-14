@@ -23,13 +23,13 @@
                 <div class="move-font">
                   <span class="move-title">国内分所</span>
                   <div class="move-content">
-                    <div>[ {{ item.chshallName }} ] {{ item.enshallName }}</div>
-                    <div>{{ item.jashallName }}</div>
-                    <div>地址：{{ item.jaAddress }}</div>
-                    <div>电话：{{ item.chPhone }}</div>
-                    <div>Address：{{ item.enAddress }}</div>
-                    <div>Tel: {{ item.enPhone }}</div>
-                    <div>所在地：{{ item.chAddress }} 電話番号：{{ item.jaPhone }}</div>
+                    <div>[ {{ item.chshallName || '' }} ] {{ item.enshallName || '' }}</div>
+                    <div>{{ item.jashallName || '' }}</div>
+                    <div>{{ "地址：" + item.jaAddress || '' }}</div>
+                    <div>{{" 电话：" + item.chPhone || '' }}</div>
+                    <div>{{ "Address：" + item.enAddress || '' }}</div>
+                    <div>{{ "Tel: " + item.enPhone || '' }}</div>
+                    <div>{{ "所在地：" + item.chAddress || '' }}{{ " 電話番号：" + item.jaPhone || ''}}</div>
                   </div>
                 </div>
               </el-carousel-item>

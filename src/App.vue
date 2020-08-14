@@ -139,11 +139,12 @@ export default {
     display: none;
   }
 #app {
+  box-sizing: border-box;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-width: 1400px;
   display: flex;
   flex-direction: column;
-  overflow: auto;
   .content {
     width: 100%;
     flex: 1;

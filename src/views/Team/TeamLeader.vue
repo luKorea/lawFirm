@@ -103,7 +103,7 @@ export default {
         margin: 10px;
         .avatar {
           width: 146px;
-          height: 143px;
+          height: 190px;
           img {
             width: 100%;
             height: 100%;

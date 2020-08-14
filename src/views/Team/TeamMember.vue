@@ -8,8 +8,8 @@
           <el-divider><span class="red-font">チームメンバー紹介</span></el-divider>
           <div class="black-font">团队成员介绍</div>
         </div>
-        <div class="content">
-          <div v-for="(item, index) in memberInfo" class="user-info" :key='index'>
+        <div class="content" v-for="(item, index) in memberInfo" :key='index'>
+          <div class="user-info">
             <div class="avatar-container">
               <!--左边头像-->
               <div class="avatar-content">
@@ -110,7 +110,7 @@ export default {
         margin: 10px;
         .avatar {
           width: 146px;
-          height: 143px;
+          height: 190px;
           img {
             width: 100%;
             height: 100%;
@@ -165,5 +165,6 @@ export default {
     border-radius:10px;
     padding: 5px;
     box-sizing: border-box;
+    margin-bottom: 30px;
   }
 </style>
