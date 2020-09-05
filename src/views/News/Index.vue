@@ -8,8 +8,8 @@
             <el-col :lg="10" :md="10" :xl="10" :sm="24">
               <div :class="{ btn: true, chooseBtn: activeIndex === 1 }" @click="activeIndex=1">
                 <div class="btnBg">
-                  <span>ニュース</span>
-                  <span>新闻资讯</span>
+                  <span style="font-size: 18px">ニュース</span>
+                  <span style="font-size: 16px">新闻资讯</span>
                 </div>
               </div>
             </el-col>
@@ -17,8 +17,8 @@
           <el-col :lg="10" :md="10" :xl="10" :sm="24">
             <div :class="{ btn: true, chooseBtn: activeIndex === 2 }" @click="activeIndex=2">
               <div class="btnBg">
-                <span>法律法規</span>
-                <span>法律法规</span>
+                <span style="font-size: 18px">法律法規</span>
+                <span style="font-size: 16px">法律法规</span>
               </div>
             </div>
           </el-col>

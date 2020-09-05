@@ -11,8 +11,8 @@
         <div class="honor-content" v-for="(item, index) in list" :key="index">
           <span class="content-date">{{ item.year }}</span>
           <div v-for="(info, index) in item.honorValue" :key="index">
-            <span class="content-j-name">- {{ info.jaHonor }}</span>
-            <span class="content-c-name">- {{ item.cnHonor }}</span>
+            <div class="content-j-name" v-if="info.jaHonor">- {{ info.jaHonor }}</div>
+            <div class="content-c-name" v-if="info.chHonor">- {{ info.chHonor }}</div>
           </div>
         </div>
         <pagination
@@ -102,6 +102,10 @@ export default {
     flex-direction: column;
     text-align: left;
     margin: 10px;
+    .content-c-name {
+      color: #2b2b2b;
+      font-size: 16px;
+    }
   }
 }
 </style>

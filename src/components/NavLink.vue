@@ -1,6 +1,4 @@
 <template>
-  <el-row>
-    <el-col>
       <div class="nav">
         <div class="nav-a">
           <ul class="nav-a-ul">
@@ -43,8 +41,6 @@
           </ul>
         </div>
       </div>
-    </el-col>
-  </el-row>
 </template>
 
 <script>
@@ -100,33 +96,11 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .nav {
-    width: 100%;
-    margin: 0 auto;
-    border-bottom: none;
-    background-color: #6A1D21;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .list-flex {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    line-height: 30px;
-    padding: 15px;
-    box-sizing: border-box;
-    .j-font {
-      font-size: 9px;
-    }
-    .c-font {
-      font-size: 7px;
-    }
-  }
   .nav-a {
+    overflow: hidden;
+    width: 1334px;
+    min-width: 1334px;
     cursor: pointer;
-    float: left;
-    position: relative;
   }
   .nav-a-ul {
     list-style: none;

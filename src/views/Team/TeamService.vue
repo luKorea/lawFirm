@@ -8,44 +8,22 @@
           <div class="black-font">团队服务领域</div>
         </div>
         <div class="content-one">
-          <div v-for="(item, index) in serviceList">
-            <div class="content1" v-if="index===0">
+          <div v-for="(item, index) in serviceList" :key="index">
+            <div class="content1">
               <div class="top-content">
                 <div class="top">{{ item.japaneseName }}</div>
-                <div class="bottom">{{ item.chineseName }}</div>
+                <div class="bottom" style="font-size: 16px">{{ item.chineseName }}</div>
               </div>
               <div class="content1-item">
                 <div class="red1-content">
                 <template v-for="item in item.details">
-                  <div>{{ item.jaContent }}</div>
+                  <div style="height: 40px;margin-bottom: 5px; line-height: 18px">{{ item.jaContent }}</div>
                 </template>
                 </div>
                 <div class="black1-content">
                 <template v-for="item in item.details">
-                  <div>{{ item.chContent }}</div>
+                  <div style="height: 40px;margin-bottom: 5px; line-height: 18px">{{ item.chContent }}</div>
                 </template>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="content-two">
-          <div v-for="(item, index) in serviceList">
-            <div class="content1" v-if="index!==0">
-              <div class="top-content">
-                <div class="top">{{ item.japaneseName }}</div>
-                <div class="bottom">{{ item.chineseName }}</div>
-              </div>
-              <div class="content1-item">
-                <div class="red1-content">
-                  <template v-for="item in item.details">
-                    <div>{{ item.jaContent }}</div>
-                  </template>
-                </div>
-                <div class="black1-content">
-                  <template v-for="item in item.details">
-                    <div>{{ item.chContent }}</div>
-                  </template>
                 </div>
               </div>
             </div>
@@ -178,17 +156,19 @@ export default {
     justify-content: center;
   }
   .red1-content {
+    width: 350px;
     display: flex;
     flex-direction: column;
     font-size: 18px;
     line-height: 35px;
     color: #932026;
     text-align: left;
-    text-indent: 2em;
-    word-break: keep-all;
-    white-space: nowrap;
+    //text-indent: 2em;
+    //word-break: keep-all;
+    //white-space: nowrap;
   }
   .black1-content {
+    width: 350px;
     display: flex;
     flex-direction: column;
     font-size: 16px;

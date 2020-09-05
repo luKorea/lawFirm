@@ -86,13 +86,14 @@ export default {
   align-content: center;
   text-align: center;
   .service-content {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
     margin: 66px 0 80px 0;
     font-size: 18px;
     text-align: left;
+    box-sizing: border-box;
     line-height: 35px;
     .content-item {
       display: flex;
@@ -101,9 +102,9 @@ export default {
       line-height: 30px;
       p {
         margin: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        //overflow: hidden;
+        //text-overflow: ellipsis;
+        //white-space: nowrap;
       }
       .left-block {
         width:20px;
@@ -115,17 +116,17 @@ export default {
       }
       .service-red-font {
         color: #932026;
-        font-size: 20px;
+        font-size: 18px;
       }
       .service-black-font {
         color: #333333;
-        font-size: 18px;
+        font-size: 16px;
       }
     }
   }
   .to-detail {
     cursor: pointer;
-    width: 250px;
+    width: 300px;
   }
 }
 </style>

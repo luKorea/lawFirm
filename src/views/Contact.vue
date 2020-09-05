@@ -21,15 +21,19 @@
                 :name="String(index)"
               >
                 <div class="move-font">
-                  <span class="move-title">国内分所</span>
+                  <span class="move-title">
+                    {{ item.type === 1 ? '国内分所' : '国外分所' }}
+                  </span>
                   <div class="move-content">
-                    <div>[ {{ item.chshallName || '' }} ] {{ item.enshallName || '' }}</div>
+                    <div>[ {{ item.chshallName || '' }} ]</div>
+                    <div>{{ item.enshallName || '' }}</div>
                     <div>{{ item.jashallName || '' }}</div>
-                    <div>{{ "地址：" + item.jaAddress || '' }}</div>
-                    <div>{{" 电话：" + item.chPhone || '' }}</div>
-                    <div>{{ "Address：" + item.enAddress || '' }}</div>
-                    <div>{{ "Tel: " + item.enPhone || '' }}</div>
-                    <div>{{ "所在地：" + item.chAddress || '' }}{{ " 電話番号：" + item.jaPhone || ''}}</div>
+                    <div v-if="item.jaAddress">地址：{{ item.jaAddress }}</div>
+                    <div v-if="item.chPhone">联系方式：{{ item.chPhone }}</div>
+                    <div v-if="item.enAddress">Address：{{ item.enAddress }}</div>
+                    <div v-if="item.enPhone">Contact: {{ item.enPhone }}</div>
+                    <div v-if="item.chAddress">所在地：{{ item.chAddress }}</div>
+                    <div v-if="item.jaPhone">連絡先：{{ item.jaPhone }}</div>
                   </div>
                 </div>
               </el-carousel-item>
@@ -73,7 +77,7 @@ export default {
           this.createMap()
         }
       },
-      'deep': true // 对象内部属性的监听，关键。
+      deep: true // 对象内部属性的监听，关键。
     }
   },
   mounted () {
@@ -214,6 +218,7 @@ export default {
       height: 454px;
       color: #fff;
       margin-top: 40px;
+      padding: 10px;
       .move-font {
         margin: 20px;
         text-align: center;
@@ -227,6 +232,9 @@ export default {
           font-weight: 400;
           color: rgba(255,255,255,1);
           line-height: 24px;
+          div {
+            margin-bottom: 4px;
+          }
         }
       }
     }

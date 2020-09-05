@@ -21,14 +21,14 @@
               <div class="red-content left-font">
                 <el-col :lg="24" :xm="24" :sm="24">
                   <div v-for="(red, index) in item.getAreadetails" :key="index">
-                    <div class="before-red-item">{{ red.japaneseDetails }}</div>
+                    <span class="before-red-item" v-html="red.japaneseDetails"></span>
                   </div>
                 </el-col>
               </div>
               <div class="black-content left-font">
                 <el-col :lg="24" :xm="24" :sm="24">
                   <div v-for="(black, index) in item.getAreadetails" :key="index">
-                    <div class="before-black-item">{{ black.chineseDetails }}</div>
+                    <div class="before-black-item" v-html="black.chineseDetails"></div>
                   </div>
                 </el-col>
               </div>
@@ -110,22 +110,21 @@ export default {
       font-weight: 400;
     }
   }
-  .before-red-item:before {
-    content: '';
-    display: inline-block;
-    margin-right: 5px;
-    width: 10px;
-    height: 10px;
-    background-color: #932026;
-  }
-  .before-black-item:before {
-    content: '';
-    display: inline-block;
-    margin-right: 5px;
-    width: 10px;
-    height: 10px;
-    background-color: #333;
-  }
+  //.before-red-item:before {
+  //  content: '';
+  //  display: inline-block;
+  //  margin-right: 5px;
+  //  width: 10px;
+  //  height: 10px;
+  //  background-color: #932026;
+  //}
+  //.before-black-item:before {
+  //  content: '';
+  //  display: inline-block;
+  //  margin-right: 5px;
+  //  width: 10px;
+  //  height: 10px;
+  //  background-color: #333;
+  //}
 }
-
 </style>

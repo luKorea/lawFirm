@@ -3,22 +3,18 @@
   <div>
     <div class="bg-container" :style="{background: 'url( '+ img +')'}"></div>
     <div class="team-container">
-      <el-col :lg="12" :md="12" :xl="12" :sm="24">
+      <div class="team-wrap">
         <div class="title">
-          <el-divider><span class="red-font">{{ teamDescInfo.japaneseHeadline }}</span></el-divider>
+         <span class="red-font">{{ teamDescInfo.japaneseHeadline }}</span>
           <div class="black-font">{{ teamDescInfo.chineseHeadline }}</div>
         </div>
         <div class="red-content left-font m-bottom">
-          <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <div v-html="teamDescInfo.japaneseContent"></div>
-          </el-col>
+          <div v-html="teamDescInfo.japaneseContent"></div>
         </div>
         <div class="black-content left-font">
-          <el-col :lg="24" :md="24" :xl="24" :sm="24">
-            <div v-html="teamDescInfo.chineseContent"></div>
-          </el-col>
+          <div v-html="teamDescInfo.chineseContent"></div>
         </div>
-      </el-col>
+      </div>
     </div>
   </div>
 </template>
@@ -69,9 +65,11 @@ export default {
 <style scoped lang="less">
   .team-container {
     display: flex;
+    width: 60%;
+    flex-direction: column;
     justify-content: center;
-    align-content: center;
     text-align: center;
+    margin: 0 auto;
     .ftitle {
       margin-top: 61px;
       line-height: 35px;

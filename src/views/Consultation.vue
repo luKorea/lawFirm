@@ -31,10 +31,10 @@
         </el-form>
       </div>
       <div class="contact-content">
-        <span class="red-font">メールアドレス： {{ listInfo.jaMailbox }}</span>
-        <span class="red-font">電話番号：{{ listInfo.jaPhone }}</span>
-        <span class="black-font">邮箱：{{ listInfo.chMailbox }}</span>
-        <span class="black-font">联系电话：{{ listInfo.chPhone }}</span>
+        <span class="red-font" style="font-size: 18px">メールアドレス： {{ listInfo.jaMailbox }}</span>
+        <span class="red-font" style="font-size: 18px">電話番号：{{ listInfo.jaPhone }}</span>
+        <span class="black-font" style="font-size: 16px">邮箱：{{ listInfo.chMailbox }}</span>
+        <span class="black-font" style="font-size: 16px">联系电话：{{ listInfo.chPhone }}</span>
       </div>
       <div class="qrCode-content">
         <el-col :xl='3' :lg="24" :md="24" :sm="24">

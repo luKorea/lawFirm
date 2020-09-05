@@ -20,10 +20,10 @@
             </div>
             <!--右边列表-->
             <div class="avatar-list">
-              <div v-for="(item, index) in leaderData.teamleadDetails" :key="index">
-                <div class="red">{{ item.jaContent }}</div>
-                <div class="black">{{ item.chContent }}</div>
-              </div>
+                <div v-for="(item, index) in leaderData.teamleadDetails" :key="index">
+                  <div class="red">{{ item.jaContent }}</div>
+                  <div class="black">{{ item.chContent }}</div>
+                </div>
             </div>
           </div>
           <div class="red-content left-font m-bottom">

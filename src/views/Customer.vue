@@ -73,7 +73,6 @@ export default {
   .customer-container {
     display: flex;
     flex-direction: column;
-    width: 1600px;
     margin: 0 auto;
     flex-wrap: wrap;
     justify-content: center;
@@ -83,18 +82,19 @@ export default {
     .customer-content {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
       margin: 66px 0 80px 0;
       font-size: 18px;
       text-align: left;
       line-height: 35px;
+      width: 80%;
       .content-item {
         display: flex;
         width: 465px;
         flex-wrap: wrap;
         flex-direction: row;
-        margin: 20px;
+        margin: 20px 0;
         line-height: 30px;
         p {
           margin: 0;
@@ -109,7 +109,7 @@ export default {
         }
         .customer-red-font {
           color: #932026;
-          font-size: 20px;
+          font-size: 18px;
         }
         .customer-red-font:before {
           content: '';
@@ -122,7 +122,7 @@ export default {
 
         .customer-black-font {
           color: #333333;
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     }
@@ -131,7 +131,7 @@ export default {
       justify-content: center;
       flex-wrap: wrap;
       margin: 0 auto;
-      width: 1200px;
+      width: 70%;
       .customer-img-item {
         width:238px;
         height:90px;

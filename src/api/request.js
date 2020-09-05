@@ -22,7 +22,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API || 'http://lawfirm.gzbigbang.cn/lsmswebsite', // url = base url + request url
-  withCredentials: true, // 是否允许携带cookie
+  withCredentials: false, // 是否允许携带cookie
   timeout: 30000, // 超时时间
   // 全局配置使用qs
   transformRequest: [(data) => {
